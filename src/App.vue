@@ -1,7 +1,15 @@
 <template>
-  <router-view />
+  <div id="app">
+    <FabricCanvas />
+  </div>
 </template>
-
-<script setup>
-//
+<script>
+import FabricCanvas from './components/FabricCanvas.vue';
+export default {
+  name: 'App',
+  components: {
+    FabricCanvas,
+  },
+};
 </script>
+
