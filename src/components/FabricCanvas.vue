@@ -60,7 +60,7 @@ onMounted(() => {
     status: 'active'
 
   });
-  const cyrcle = new Circle({
+  const circle = new Circle({
     left: 950,
     top: 597,
     fill: 'red',
@@ -82,7 +82,7 @@ onMounted(() => {
   fabricCanvas.add(twoCen);
   fabricCanvas.add(threeCen);
   fabricCanvas.add(fourCen);
-  fabricCanvas.add(cyrcle);
+  fabricCanvas.add(circle);
 });
 
 </script>
