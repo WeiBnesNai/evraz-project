@@ -23,16 +23,16 @@
       <div class="FormBlock" :style="{ 'background-color': Form}"> <p>Формовка</p>
         <div class="FormTech">
           <div id="TopF"></div>
-          <div id="middleF"></div>
+          <div ref="test" id="middleF" @click="goTest"></div>
           <div id="bottomF"></div>
       </div>
       </div>
-      <div class="ColdBlock" :style="{ 'background-color': Cold}"> <p>Охлождение</p>
+      <div class="ColdBlock" :style="{ 'background-color': Cold}"> <p>Охлаждение</p>
         <div class="ColdTech">
           <div id="TopC"></div>
           <div id="middleC"></div>
           <div  id="bottomC">
-            <img id="picTurC" :style="{ 'transform': `rotate(${bottomCRotate}deg)`}" src="https://avatars.mds.yandex.net/i?id=06d4eb0640f97077a81e81bce482bda907cdbbf0-5194765-images-thumbs&n=13"
+            <img id="picTurC" :style="{ 'transform': `rotate(${bottomCRotate}deg)`}" src="https://avatars.mds.yandex.net/i?id=06d4eb0640f97077a81e81bce482bda907cdbbf0-5194765-images-thumbs&n=13">
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@
         @click = 'FormOn'
         >Формовка Вкл</button>
         <button class="ButtonOff"
-                @click = 'FormStopp'
+                @click = 'FormStop'
         >Формовка Стоп</button>
         <button class="ButtonWarn"
         @click = 'FormWarn'
@@ -135,7 +135,9 @@
                 @click = 'BoxWarn'
         >Упаковка Авария</button>
       </div>
-      <button class="Txt">Control Panel</button>
+      <a
+        href = "http://www.evraz.com/ru"
+        class="Txt">Control Panel</a>
     </div>
 
 
@@ -161,24 +163,61 @@ let Box = ref('')
 let bottomSRotate = ref(0)
 let bottomCRotate = ref(0)
 let interval = ref()
+let interval2 = ref()
+let interval3 = ref()
+let interval4 = ref()
+let interval5 = ref()
+let interval6 = ref()
+
+let test = ref()
+
+
+Smes.value = "#21BA45"
+Form.value = "#21BA45"
+Cold.value = "#21BA45"
+Up.value = "#21BA45"
+Hot.value = "#21BA45"
+Box.value = "#21BA45"
+
+function goTest() {
+  setInterval(() => {
+    let rect = test.value.getBoundingClientRect()
+    let newTop = rect.top + 10
+    test.value.style.top = newTop + 'px'
+  }, 500)
+  goTestDown
+}
+function goTestDown() {
+  setInterval(() => {
+    let rect = test.value.getBoundingClientRect()
+    let newTop = rect.top - 10
+    test.value.style.top = newTop + 'px'
+  }, 700)
+}
 
 function SmesStop() {
   Smes.value = 'orangered'
+  clearInterval(interval.value)
 }
-function FormStopp() {
+function FormStop() {
   Form.value = 'orangered'
+  clearInterval(interval2.value)
 }
 function ColdStop() {
   Cold.value = 'orangered'
+  clearInterval(interval3.value)
 }
 function UpStop() {
   Up.value = 'orangered'
+  clearInterval(interval4.value)
 }
 function HotStop() {
   Hot.value = 'orangered'
+  clearInterval(interval5.value)
 }
 function BoxStop() {
   Box.value = 'orangered'
+  clearInterval(interval6.value)
 }
 
 function SmesOn() {
@@ -188,19 +227,24 @@ function SmesOn() {
 }
 function FormOn() {
   Form.value = "#21BA45"
+  clearInterval(interval2.value)
 
 }
 function ColdOn() {
   Cold.value = "#21BA45"
+  clearInterval(interval3.value)
 }
 function UpOn() {
   Up.value = "#21BA45"
+  clearInterval(interval4.value)
 }
 function HotOn() {
   Hot.value = "#21BA45"
+  clearInterval(interval5.value)
 }
 function BoxOn() {
   Box.value = "#21BA45"
+  clearInterval(interval6.value)
 }
 function SmesWarn() {
   interval.value = setInterval(() => {
@@ -225,24 +269,65 @@ function SmesWarn() {
 
 
 function FormWarn() {
-  Form.value = "red";
+  interval2.value = setInterval(() => {
+    if (Form.value === 'black') {
+      Form.value = 'red'
+    }
+    else {
+      Form.value = 'black'
+
+    }
+  }, 500)
 }
 function ColdWarn() {
-  Cold.value = "red";
+  interval3.value = setInterval(() => {
+    if (Cold.value === 'black') {
+      Cold.value = 'red'
+    }
+    else {
+      Cold.value = 'black'
+
+    }
+  }, 500)
 }
 function UpWarn() {
-  Up.value = "red";
+  interval4.value = setInterval(() => {
+    if (Up.value === 'black') {
+      Up.value = 'red'
+    }
+    else {
+      Up.value = 'black'
+
+    }
+  }, 500)
 }
 function HotWarn() {
-  Hot.value = "red";
+  interval5.value = setInterval(() => {
+    if (Hot.value === 'black') {
+      Hot.value = 'red'
+    }
+    else {
+      Hot.value = 'black'
+
+    }
+  }, 500)
 }
 function BoxWarn() {
-  Box.value = "red";
+  interval6.value = setInterval(() => {
+    if (Box.value === 'black') {
+      Box.value = 'red'
+    }
+    else {
+      Box.value = 'black'
+
+    }
+  }, 500)
 }
 
 
 function rotateBottomS() {
   setInterval(() => {
+    if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45")
     bottomSRotate.value += 5
   }, 25)
 }
@@ -250,18 +335,30 @@ function rotateBottomS() {
 rotateBottomS()
 function rotateBottomC() {
   setInterval(() => {
+    if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45")
     bottomCRotate.value += 15
   }, 25)
-  // setInterval(() => {
-  //   bottomCRotate.value += 12
-  // }, 125)
 }
 
 rotateBottomC()
 
+function UpDownForm() {
+  setInterval(() => {
+    if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45"){
+
+    }
+
+  }, 500)
+}
+UpDownForm()
 </script>
 
 <style scoped>
+.Txt {
+  text-decoration: Canvas;
+  cursor: context-menu;
+}
+
 .Con {
   background-color: grey;
   width: 900px;
