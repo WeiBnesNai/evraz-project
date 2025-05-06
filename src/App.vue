@@ -23,8 +23,10 @@
       <div class="FormBlock" :style="{ 'background-color': Form}"> <p>Формовка</p>
         <div class="FormTech">
           <div id="TopF"></div>
-          <div ref="test" id="middleF" @click="goTest"></div>
-          <div id="bottomF"></div>
+          <div   id="middleF">
+            <div ref="udm" id="middleF1" ></div>
+            <div id="bottomF"></div>
+          </div>
       </div>
       </div>
       <div class="ColdBlock" :style="{ 'background-color': Cold}"> <p>Охлаждение</p>
@@ -169,7 +171,7 @@ let interval4 = ref()
 let interval5 = ref()
 let interval6 = ref()
 
-let test = ref()
+let udm = ref()
 
 
 Smes.value = "#21BA45"
@@ -179,21 +181,41 @@ Up.value = "#21BA45"
 Hot.value = "#21BA45"
 Box.value = "#21BA45"
 
-function goTest() {
+// function provForm() {
+//   setInterval(() => {
+//     if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+//       UDForm()
+//     }
+//   }, 30)
+// }
+
+function UDForm(rect) {
+
+  // console.log(1)
   setInterval(() => {
-    let rect = test.value.getBoundingClientRect()
-    let newTop = rect.top + 10
-    test.value.style.top = newTop + 'px'
-  }, 500)
-  goTestDown
-}
-function goTestDown() {
+    // console.log(1.5)
+      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      let rect = udm.value.getBoundingClientRect()
+      let newTop = rect.height + 10
+      udm.value.style.height = newTop + 'px'
+
+    }
+  }, 900)
+
+  // console.log(2)
   setInterval(() => {
-    let rect = test.value.getBoundingClientRect()
-    let newTop = rect.top - 10
-    test.value.style.top = newTop + 'px'
-  }, 700)
+    if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      // console.log(2.5)
+      let rect = udm.value.getBoundingClientRect()
+      let newTop = rect.height - 20
+      udm.value.style.height = newTop + 'px'
+
+    }
+
+  }, 1800)
+  // console.log(3)
 }
+UDForm()
 
 function SmesStop() {
   Smes.value = 'orangered'
@@ -341,16 +363,6 @@ function rotateBottomC() {
 }
 
 rotateBottomC()
-
-function UpDownForm() {
-  setInterval(() => {
-    if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45"){
-
-    }
-
-  }, 500)
-}
-UpDownForm()
 </script>
 
 <style scoped>
@@ -358,7 +370,6 @@ UpDownForm()
   text-decoration: Canvas;
   cursor: context-menu;
 }
-
 .Con {
   background-color: grey;
   width: 900px;
@@ -561,7 +572,7 @@ font-size: 18px;
   height: 120px;
   width: 70px;
 }
-#middleF {
+#middleF1 {
   background-color: #1D1D1D;
   width: 30px;
   height: 90px;
