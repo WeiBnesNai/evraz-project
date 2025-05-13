@@ -3,6 +3,9 @@
 <!--    <FabricCanvas />-->
 
     <div class="Con">
+      <div id="Bear">
+        <img id ='bear1' src = 'https://avatars.mds.yandex.net/i?id=c3696a90f4f8a0e250ef332d53dc0fef_l-5232660-images-thumbs&n=13'>
+      </div>
       <div class="SmesBlock" :style="{ 'background-color': Smes}"> <p>Смеситель</p>
       <div class="SmesTech">
         <div id="TopS">
@@ -49,7 +52,7 @@
         <div class="HotTech">
           <div id="TopH"></div>
           <div id="middleH"></div>
-          <div  id="bottomH"></div>
+          <div  id="bottomH" :style="{ 'background-color': Hot1}"></div>
         </div>
       </div>
       <div class="BoxBlock" :style="{ 'background-color': Box}"> <p>Упаковка</p>
@@ -161,6 +164,7 @@ let Form = ref('')
 let Cold = ref('')
 let Up = ref('')
 let Hot = ref('')
+let Hot1 = ref("")
 let Box = ref('')
 let bottomSRotate = ref(0)
 let bottomCRotate = ref(0)
@@ -170,17 +174,27 @@ let interval3 = ref()
 let interval4 = ref()
 let interval5 = ref()
 let interval6 = ref()
+let intervalhot = ref()
+
 
 let udm = ref()
-
-
 Smes.value = "#21BA45"
 Form.value = "#21BA45"
 Cold.value = "#21BA45"
 Up.value = "#21BA45"
 Hot.value = "#21BA45"
 Box.value = "#21BA45"
+Hot1.value = "rgb(250, 50, 50, 45%)"
 
+
+function BearTravel() {
+
+  setTimeout(() =>{
+
+  }, 5000)
+
+}
+BearTravel()
 // function provForm() {
 //   setInterval(() => {
 //     if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
@@ -188,9 +202,20 @@ Box.value = "#21BA45"
 //     }
 //   }, 30)
 // }
-
-function UDForm(rect) {
-
+let numberTime = ref()
+function UDForm() {
+  setInterval(() => {
+    if (numberTime.value === 0) {
+      let rect = udm.value.getBoundingClientRect()
+      let newTop = rect.height = 90
+      udm.value.style.height = newTop + 'px'
+    }
+    if (numberTime.value === 1) {
+      let rect = udm.value.getBoundingClientRect()
+      let newTop = rect.height = 100
+      udm.value.style.height = newTop + 'px'
+    }
+  }, 1)
   // console.log(1)
   setInterval(() => {
     // console.log(1.5)
@@ -198,10 +223,9 @@ function UDForm(rect) {
       let rect = udm.value.getBoundingClientRect()
       let newTop = rect.height + 10
       udm.value.style.height = newTop + 'px'
-
+        numberTime.value = 1
     }
   }, 900)
-
   // console.log(2)
   setInterval(() => {
     if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
@@ -209,7 +233,7 @@ function UDForm(rect) {
       let rect = udm.value.getBoundingClientRect()
       let newTop = rect.height - 20
       udm.value.style.height = newTop + 'px'
-
+      numberTime.value = 0
     }
 
   }, 1800)
@@ -220,26 +244,32 @@ UDForm()
 function SmesStop() {
   Smes.value = 'orangered'
   clearInterval(interval.value)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 function FormStop() {
   Form.value = 'orangered'
   clearInterval(interval2.value)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 function ColdStop() {
   Cold.value = 'orangered'
   clearInterval(interval3.value)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 function UpStop() {
   Up.value = 'orangered'
   clearInterval(interval4.value)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 function HotStop() {
   Hot.value = 'orangered'
   clearInterval(interval5.value)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 function BoxStop() {
   Box.value = 'orangered'
   clearInterval(interval6.value)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 
 function SmesOn() {
@@ -278,6 +308,7 @@ function SmesWarn() {
 
     }
   }, 500)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 
 
@@ -300,6 +331,7 @@ function FormWarn() {
 
     }
   }, 500)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 function ColdWarn() {
   interval3.value = setInterval(() => {
@@ -311,6 +343,7 @@ function ColdWarn() {
 
     }
   }, 500)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 function UpWarn() {
   interval4.value = setInterval(() => {
@@ -322,6 +355,7 @@ function UpWarn() {
 
     }
   }, 500)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 function HotWarn() {
   interval5.value = setInterval(() => {
@@ -333,6 +367,7 @@ function HotWarn() {
 
     }
   }, 500)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 function BoxWarn() {
   interval6.value = setInterval(() => {
@@ -344,8 +379,8 @@ function BoxWarn() {
 
     }
   }, 500)
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
-
 
 function rotateBottomS() {
   setInterval(() => {
@@ -361,7 +396,20 @@ function rotateBottomC() {
     bottomCRotate.value += 15
   }, 25)
 }
+function hot() {
+  intervalhot.value = setInterval(() => {
+    if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45"){
+    if (Hot1.value === "rgb(250, 50, 50, 45%)") {
+      Hot1.value = "rgb(250, 50, 50, 69%)"
+    }
+    else {
+      Hot1.value = "rgb(250, 50, 50, 45%)"
 
+    }  }
+  }, 900)
+
+}
+hot()
 rotateBottomC()
 </script>
 
@@ -381,8 +429,19 @@ rotateBottomC()
   font-size: 18px;
   text-align: center;
   color: wheat;
+}
 
-
+#Bear {
+  position: relative;
+  height: 50px;
+  width: 120px;
+  top: -39px;
+  left: 144px;
+  z-index: -2;
+}
+#bear1 {
+  height: 50px;
+  width: 120px;
 }
 
 
