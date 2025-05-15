@@ -1,13 +1,20 @@
 <template>
   <div id="app">
 <!--    <FabricCanvas />-->
+    <div id="Bear">
+      <img id ='bear1' :src = bearStyleSrc
+           :style="{ 'left':bearStylePosLeft, 'top':bearStylePosTop, 'height':bearStyleStyleHeight, 'width':bearStyleStyleWidth,
+           'z-index': bearStyleStyleZ, 'transform': `rotate(${bearRotate}deg)` }"
+           style="position: relative"
 
+      >
+    </div>
     <div class="Con">
-      <div id="Bear">
-        <img id ='bear1' src = 'https://avatars.mds.yandex.net/i?id=c3696a90f4f8a0e250ef332d53dc0fef_l-5232660-images-thumbs&n=13'>
-      </div>
+      <div id="left"></div>
+      <div id="right"></div>
       <div class="SmesBlock" :style="{ 'background-color': Smes}"> <p>Смеситель</p>
       <div class="SmesTech">
+
         <div id="TopS">
           <div class="water">
             <div class="ripple-one"></div>
@@ -186,13 +193,69 @@ Hot.value = "#21BA45"
 Box.value = "#21BA45"
 Hot1.value = "rgb(250, 50, 50, 45%)"
 
+let bearStyleSrc = ref("")
+let bearStyleStyleHeight = ref("")
+let bearStyleStyleWidth = ref("")
+let bearStylePosLeft = ref("")
+let bearStylePosTop = ref("")
+let bearStyleStyleZ = ref("")
+let bearRotate = ref("")
+
 
 function BearTravel() {
+  bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
+  setInterval(() => {
+    setTimeout(() => {
+      bearStylePosLeft.value = 140 + "px"
+      bearStylePosTop.value = 15 + "px"
+      bearStyleStyleHeight.value = 20 + "px"
+      bearStyleStyleWidth.value = 120 + "px"
+      bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
+      setTimeout(() => {
+        bearStylePosLeft.value = 280 + "px"
+        bearStylePosTop.value = 18 + "px"
+        bearStyleStyleHeight.value = 20 + "px"
+        bearStyleStyleWidth.value = 120 + "px"
 
-  setTimeout(() =>{
+        setTimeout(() => {
+          bearStyleStyleHeight.value = 25 + "px"
+          bearStyleStyleWidth.value = 40 + "px"
+          bearStylePosLeft.value = 459 + "px"
+          bearStylePosTop.value = -10 + "px"
+          bearStyleSrc.value = "https://media.istockphoto.com/id/1302390177/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BE%D1%80%D0%B0%D0%BD%D0%B6%D0%B5%D0%B2%D1%8B%D0%B9-%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B8%D0%B9-%D0%BC%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%8C-%D0%B6%D0%B5%D0%BB%D0%B5-%D1%81%D0%BB%D0%B0%D0%B4%D0%BA%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BD%D1%84%D0%B5%D1%82%D1%8B-%D1%81-%D1%83%D0%B4%D0%B8%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%BC-%D0%B2%D0%BA%D1%83%D1%81%D0%BE%D0%BC-%D0%BF%D0%BB%D0%BE%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD.jpg?s=612x612&w=0&k=20&c=Kd9x56zTT8NoEQPS4txp4XFVdIca29zq8MhdvuKUw38="
 
-  }, 5000)
+          setTimeout(() => {
+            bearStyleStyleHeight.value = 25 + "px"
+            bearStyleStyleWidth.value = 40 + "px"
+            bearStylePosLeft.value = 603 + "px"
+            bearStylePosTop.value = 0 + "px"
+            bearRotate.value = "90"
 
+            setTimeout(() => {
+              bearStyleStyleHeight.value = 45 + "px"
+              bearStyleStyleWidth.value = 45 + "px"
+              bearStylePosLeft.value = 747 + "px"
+              bearStylePosTop.value = -39 + "px"
+              bearRotate.value = "0"
+              bearStyleSrc.value = "https://avatars.mds.yandex.net/get-mpic/4304254/2a0000018a5e9a3a25e166314e5f55102e92/optimize"
+            }, 500)
+
+          }, 500)
+
+        }, 500)
+
+      }, 500)
+
+    }, 500)
+    setTimeout(() => {
+      bearStylePosLeft.value = 0 + "px"
+      bearStylePosTop.value = 0 + "px"
+      bearStyleStyleHeight.value = 20 + "px"
+      bearStyleStyleWidth.value = 120 + "px"
+      bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
+    },500)
+    BearTravel()
+  }, 2500)
 }
 BearTravel()
 // function provForm() {
@@ -431,16 +494,36 @@ rotateBottomC()
   color: wheat;
 }
 
+#left{
+  position: relative;
+  width: 3px;
+  height: 25px;
+  background-color: #1D1D1D;
+  left: 27px;
+  bottom: 25px;
+
+}
+#right{
+  left: 137px;
+  bottom: 25px;
+  position: relative;
+  width: 3px;
+  height: 25px;
+  background-color: rgb(40, 40, 40, 75%);
+  backdrop-filter: blur(3px);
+}
+
 #Bear {
   position: relative;
   height: 50px;
   width: 120px;
-  top: -39px;
-  left: 144px;
+  left: 255px;
+  top: 310px;
   z-index: -2;
+
 }
 #bear1 {
-  height: 50px;
+  height: 20px;
   width: 120px;
 }
 
@@ -606,8 +689,6 @@ font-size: 18px;
   width: 60px;
   height: 60px;
   left: 7px;
-  //background-image: url("https://cdn2.iconfinder.com/data/icons/drone-applications/512/turbine-1024.png");
-  //background-size: auto 100%;
   border: #1D1D1D 1px solid;
   z-index: -1;
 }
@@ -705,8 +786,9 @@ border: #1D1D1D solid 1px;
   height: 30px;
   position: relative;
   right: 7px;
-  background-color: rgb(50, 50, 50, 25%);
+  background-color: rgb(30, 30, 30, 5%);
   backdrop-filter: blur(10px);
+  z-index: -3;
 }
 
 .HotTech{
