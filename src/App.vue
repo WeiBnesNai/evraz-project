@@ -200,71 +200,62 @@ let bearStylePosLeft = ref("")
 let bearStylePosTop = ref("")
 let bearStyleStyleZ = ref("")
 let bearRotate = ref("")
+let TimeStop1 = ref()
+let TimeStop2 = ref()
+let TimeStop3 = ref()
+let TimeStop4 = ref()
+let TimeStop5 = ref()
+let TimeStop = ref()
 
-
-function BearTravel() {
-  bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
-  setInterval(() => {
-    setTimeout(() => {
-      bearStylePosLeft.value = 140 + "px"
-      bearStylePosTop.value = 15 + "px"
-      bearStyleStyleHeight.value = 20 + "px"
-      bearStyleStyleWidth.value = 120 + "px"
-      bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
-      setTimeout(() => {
-        bearStylePosLeft.value = 280 + "px"
-        bearStylePosTop.value = 18 + "px"
-        bearStyleStyleHeight.value = 20 + "px"
-        bearStyleStyleWidth.value = 120 + "px"
-
-        setTimeout(() => {
-          bearStyleStyleHeight.value = 25 + "px"
-          bearStyleStyleWidth.value = 40 + "px"
-          bearStylePosLeft.value = 459 + "px"
-          bearStylePosTop.value = -10 + "px"
-          bearStyleSrc.value = "https://media.istockphoto.com/id/1302390177/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BE%D1%80%D0%B0%D0%BD%D0%B6%D0%B5%D0%B2%D1%8B%D0%B9-%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B8%D0%B9-%D0%BC%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%8C-%D0%B6%D0%B5%D0%BB%D0%B5-%D1%81%D0%BB%D0%B0%D0%B4%D0%BA%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BD%D1%84%D0%B5%D1%82%D1%8B-%D1%81-%D1%83%D0%B4%D0%B8%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%BC-%D0%B2%D0%BA%D1%83%D1%81%D0%BE%D0%BC-%D0%BF%D0%BB%D0%BE%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD.jpg?s=612x612&w=0&k=20&c=Kd9x56zTT8NoEQPS4txp4XFVdIca29zq8MhdvuKUw38="
-
-          setTimeout(() => {
-            bearStyleStyleHeight.value = 25 + "px"
-            bearStyleStyleWidth.value = 40 + "px"
-            bearStylePosLeft.value = 603 + "px"
-            bearStylePosTop.value = 0 + "px"
-            bearRotate.value = "90"
-
-            setTimeout(() => {
-              bearStyleStyleHeight.value = 45 + "px"
-              bearStyleStyleWidth.value = 45 + "px"
-              bearStylePosLeft.value = 747 + "px"
-              bearStylePosTop.value = -39 + "px"
-              bearRotate.value = "0"
-              bearStyleSrc.value = "https://avatars.mds.yandex.net/get-mpic/4304254/2a0000018a5e9a3a25e166314e5f55102e92/optimize"
-            }, 500)
-
-          }, 500)
-
-        }, 500)
-
-      }, 500)
-
-    }, 500)
-    setTimeout(() => {
-      bearStylePosLeft.value = 0 + "px"
-      bearStylePosTop.value = 0 + "px"
-      bearStyleStyleHeight.value = 20 + "px"
-      bearStyleStyleWidth.value = 120 + "px"
-      bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
-    },500)
-    BearTravel()
-  }, 2500)
-}
 BearTravel()
-// function provForm() {
-//   setInterval(() => {
-//     if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-//       UDForm()
-//     }
-//   }, 30)
-// }
+bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
+function BearTravel() {
+    bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
+    bearStylePosLeft.value = 0 + "px"
+    bearStylePosTop.value = 0 + "px"
+    bearStyleStyleHeight.value = 20 + "px"
+    bearStyleStyleWidth.value = 120 + "px"
+
+  TimeStop1.value = setTimeout(() => {
+      bearStylePosLeft.value = 140 + "px"
+      bearStylePosTop.value = 14 + "px"
+      bearStyleStyleHeight.value = 20 + "px"
+      bearStyleStyleWidth.value = 120 + "px"
+    }, 3000)
+  TimeStop2.value = setTimeout(() => {
+      bearStylePosLeft.value = 280 + "px"
+      bearStylePosTop.value = 18 + "px"
+      bearStyleStyleHeight.value = 20 + "px"
+      bearStyleStyleWidth.value = 120 + "px"
+    }, 6000)
+  TimeStop3.value = setTimeout(() => {
+      bearStyleStyleHeight.value = 25 + "px"
+      bearStyleStyleWidth.value = 40 + "px"
+      bearStylePosLeft.value = 459 + "px"
+      bearStylePosTop.value = -10 + "px"
+      bearStyleSrc.value = "https://media.istockphoto.com/id/1302390177/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BE%D1%80%D0%B0%D0%BD%D0%B6%D0%B5%D0%B2%D1%8B%D0%B9-%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B8%D0%B9-%D0%BC%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%8C-%D0%B6%D0%B5%D0%BB%D0%B5-%D1%81%D0%BB%D0%B0%D0%B4%D0%BA%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BD%D1%84%D0%B5%D1%82%D1%8B-%D1%81-%D1%83%D0%B4%D0%B8%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%BC-%D0%B2%D0%BA%D1%83%D1%81%D0%BE%D0%BC-%D0%BF%D0%BB%D0%BE%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD.jpg?s=612x612&w=0&k=20&c=Kd9x56zTT8NoEQPS4txp4XFVdIca29zq8MhdvuKUw38="
+    }, 9000)
+  TimeStop4.value =  setTimeout(() => {
+      bearStyleStyleHeight.value = 25 + "px"
+      bearStyleStyleWidth.value = 40 + "px"
+      bearStylePosLeft.value = 603 + "px"
+      bearStylePosTop.value = 0 + "px"
+      bearRotate.value = "90"
+    }, 12000)
+  TimeStop5.value = setTimeout(() => {
+      bearStyleStyleHeight.value = 45 + "px"
+      bearStyleStyleWidth.value = 45 + "px"
+      bearStylePosLeft.value = 747 + "px"
+      bearStylePosTop.value = -39 + "px"
+      bearRotate.value = "0"
+      bearStyleSrc.value = "https://avatars.mds.yandex.net/get-mpic/4304254/2a0000018a5e9a3a25e166314e5f55102e92/optimize"
+    }, 15000)
+}
+setInterval(() => {
+BearTravel()
+},18000)
+
+
 let numberTime = ref()
 function UDForm() {
   setInterval(() => {
@@ -308,42 +299,70 @@ function SmesStop() {
   Smes.value = 'orangered'
   clearInterval(interval.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
+
 }
 function FormStop() {
   Form.value = 'orangered'
   clearInterval(interval2.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
 function ColdStop() {
   Cold.value = 'orangered'
   clearInterval(interval3.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
 function UpStop() {
   Up.value = 'orangered'
   clearInterval(interval4.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
 function HotStop() {
   Hot.value = 'orangered'
   clearInterval(interval5.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
 function BoxStop() {
   Box.value = 'orangered'
   clearInterval(interval6.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
 
 function SmesOn() {
   Smes.value = "#21BA45"
-  clearInterval(interval.value)
-
 }
 function FormOn() {
   Form.value = "#21BA45"
   clearInterval(interval2.value)
-
 }
 function ColdOn() {
   Cold.value = "#21BA45"
@@ -374,16 +393,6 @@ function SmesWarn() {
   Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 
-
-  // setTimeout(function() {
-  //   Smes.value = 'black';
-  //   setInterval(function() {
-  //     Smes.value = 'red';
-  //
-  //   }, 500)
-  // }, 3000)
-
-
 function FormWarn() {
   interval2.value = setInterval(() => {
     if (Form.value === 'black') {
@@ -395,7 +404,13 @@ function FormWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
+
 function ColdWarn() {
   interval3.value = setInterval(() => {
     if (Cold.value === 'black') {
@@ -407,6 +422,11 @@ function ColdWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
 function UpWarn() {
   interval4.value = setInterval(() => {
@@ -419,6 +439,11 @@ function UpWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
 function HotWarn() {
   interval5.value = setInterval(() => {
@@ -431,6 +456,11 @@ function HotWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
 function BoxWarn() {
   interval6.value = setInterval(() => {
@@ -443,6 +473,11 @@ function BoxWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
 }
 
 function rotateBottomS() {
