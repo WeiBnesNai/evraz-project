@@ -16,14 +16,21 @@
       <div class="SmesTech">
 
         <div id="TopS">
+          <div id="SmesRPMtar">
+            <p id="RpmTxt">RPM: {{RPMnumSmes}}</p>
+          </div>
           <div class="water">
             <div class="ripple-one"></div>
             <div class="ripple-two"></div>
             <div class="ripple-three"></div>
+
           </div>
 
         </div>
-        <div id="middleS"></div>
+        <div id="middleS">
+
+
+        </div>
         <div id="bottomS" >
           <img id="picTurS" :style="{ 'transform': `rotate(${bottomSRotate}deg)`}" src="https://cdn2.iconfinder.com/data/icons/drone-applications/512/turbine-1024.png">
 
@@ -79,6 +86,7 @@
 
         <div class="ControlSmesitel">
 <button class="ButtonOn"
+        :style="{'cursor': SmesButtOn}"
 @click = 'SmesOn'
 >Смеситель Вкл</button>
       <button class="ButtonOff"
@@ -92,6 +100,7 @@
       <div class="FormControl">
         <button class="ButtonOn"
         @click = 'FormOn'
+                :style="{'cursor': FormButtOn}"
         >Формовка Вкл</button>
         <button class="ButtonOff"
                 @click = 'FormStop'
@@ -104,6 +113,7 @@
       <div class="ColdControl">
         <button class="ButtonOn"
         @click = 'ColdOn'
+                :style="{'cursor': ColdButtOn}"
         >Охлаждение Вкл</button>
         <button class="ButtonOff"
         @click = 'ColdStop'
@@ -116,6 +126,7 @@
       <div class="UpControl">
         <button class="ButtonOn"
         @click = 'UpOn'
+                :style="{'cursor': UDButtOn}"
         >Извлечение Вкл</button>
         <button class="ButtonOff"
         @click = 'UpStop'
@@ -128,6 +139,7 @@
       <div class="HotControl">
         <button class="ButtonOn"
         @click = 'HotOn'
+                :style="{'cursor': HotButtOn}"
         >Сушка Вкл</button>
         <button class="ButtonOff"
          @click = 'HotStop'>Сушка Стоп</button>
@@ -139,6 +151,7 @@
       <div class="BoxControl">
         <button class="ButtonOn"
         @click = 'BoxOn'
+                :style="{'cursor': BoxButtOn}"
         >Упаковка Вкл</button>
         <button class="ButtonOff"
         @click = 'BoxStop'
@@ -165,7 +178,7 @@ import { ref } from 'vue'
 //     FabricCanvas,
 //   },
 // };
-
+let SmesButtOn = ref('')
 let Smes = ref('')
 let Form = ref('')
 let Cold = ref('')
@@ -206,57 +219,187 @@ let TimeStop3 = ref()
 let TimeStop4 = ref()
 let TimeStop5 = ref()
 let TimeStop = ref()
+let RPMnumSmes = 0
+let TimeStopInt = ref()
 
-BearTravel()
+
+let NumberPos = 0
+function pos1() {
+  bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
+  bearStylePosLeft.value = 0 + "px"
+  bearStylePosTop.value = 0 + "px"
+  bearStyleStyleHeight.value = 20 + "px"
+  bearStyleStyleWidth.value = 120 + "px"
+}
+function pos2() {
+  bearStylePosLeft.value = 140 + "px"
+  bearStylePosTop.value = 14 + "px"
+  bearStyleStyleHeight.value = 20 + "px"
+  bearStyleStyleWidth.value = 120 + "px"
+}
+function pos3() {
+  bearStylePosLeft.value = 280 + "px"
+  bearStylePosTop.value = 18 + "px"
+  bearStyleStyleHeight.value = 20 + "px"
+  bearStyleStyleWidth.value = 120 + "px"
+}
+function pos4() {
+  bearStyleStyleHeight.value = 25 + "px"
+  bearStyleStyleWidth.value = 40 + "px"
+  bearStylePosLeft.value = 459 + "px"
+  bearStylePosTop.value = -10 + "px"
+  bearStyleSrc.value = "https://media.istockphoto.com/id/1302390177/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BE%D1%80%D0%B0%D0%BD%D0%B6%D0%B5%D0%B2%D1%8B%D0%B9-%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B8%D0%B9-%D0%BC%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%8C-%D0%B6%D0%B5%D0%BB%D0%B5-%D1%81%D0%BB%D0%B0%D0%B4%D0%BA%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BD%D1%84%D0%B5%D1%82%D1%8B-%D1%81-%D1%83%D0%B4%D0%B8%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%BC-%D0%B2%D0%BA%D1%83%D1%81%D0%BE%D0%BC-%D0%BF%D0%BB%D0%BE%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD.jpg?s=612x612&w=0&k=20&c=Kd9x56zTT8NoEQPS4txp4XFVdIca29zq8MhdvuKUw38="
+
+}
+function pos5() {
+  bearStyleStyleHeight.value = 25 + "px"
+  bearStyleStyleWidth.value = 40 + "px"
+  bearStylePosLeft.value = 603 + "px"
+  bearStylePosTop.value = 0 + "px"
+  bearRotate.value = "90"
+}
+function pos6() {
+  bearStyleStyleHeight.value = 45 + "px"
+  bearStyleStyleWidth.value = 45 + "px"
+  bearStylePosLeft.value = 747 + "px"
+  bearStylePosTop.value = -39 + "px"
+  bearRotate.value = "0"
+  bearStyleSrc.value = "https://avatars.mds.yandex.net/get-mpic/4304254/2a0000018a5e9a3a25e166314e5f55102e92/optimize"
+}
+
+
 bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
 function BearTravel() {
-    bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
-    bearStylePosLeft.value = 0 + "px"
-    bearStylePosTop.value = 0 + "px"
-    bearStyleStyleHeight.value = 20 + "px"
-    bearStyleStyleWidth.value = 120 + "px"
-
+pos1()
+  NumberPos = 1
+  console.log(NumberPos)
   TimeStop1.value = setTimeout(() => {
-      bearStylePosLeft.value = 140 + "px"
-      bearStylePosTop.value = 14 + "px"
-      bearStyleStyleHeight.value = 20 + "px"
-      bearStyleStyleWidth.value = 120 + "px"
+    pos2()
+    NumberPos = 2
+    console.log(NumberPos)
     }, 3000)
   TimeStop2.value = setTimeout(() => {
-      bearStylePosLeft.value = 280 + "px"
-      bearStylePosTop.value = 18 + "px"
-      bearStyleStyleHeight.value = 20 + "px"
-      bearStyleStyleWidth.value = 120 + "px"
+    pos3()
+    NumberPos = 3
+    console.log(NumberPos)
     }, 6000)
   TimeStop3.value = setTimeout(() => {
-      bearStyleStyleHeight.value = 25 + "px"
-      bearStyleStyleWidth.value = 40 + "px"
-      bearStylePosLeft.value = 459 + "px"
-      bearStylePosTop.value = -10 + "px"
-      bearStyleSrc.value = "https://media.istockphoto.com/id/1302390177/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BE%D1%80%D0%B0%D0%BD%D0%B6%D0%B5%D0%B2%D1%8B%D0%B9-%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B8%D0%B9-%D0%BC%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%8C-%D0%B6%D0%B5%D0%BB%D0%B5-%D1%81%D0%BB%D0%B0%D0%B4%D0%BA%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BD%D1%84%D0%B5%D1%82%D1%8B-%D1%81-%D1%83%D0%B4%D0%B8%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%BC-%D0%B2%D0%BA%D1%83%D1%81%D0%BE%D0%BC-%D0%BF%D0%BB%D0%BE%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD.jpg?s=612x612&w=0&k=20&c=Kd9x56zTT8NoEQPS4txp4XFVdIca29zq8MhdvuKUw38="
-    }, 9000)
+    pos4()
+    NumberPos = 4
+    console.log(NumberPos)
+ }, 9000)
   TimeStop4.value =  setTimeout(() => {
-      bearStyleStyleHeight.value = 25 + "px"
-      bearStyleStyleWidth.value = 40 + "px"
-      bearStylePosLeft.value = 603 + "px"
-      bearStylePosTop.value = 0 + "px"
-      bearRotate.value = "90"
+    pos5()
+    NumberPos = 5
+    console.log(NumberPos)
     }, 12000)
   TimeStop5.value = setTimeout(() => {
-      bearStyleStyleHeight.value = 45 + "px"
-      bearStyleStyleWidth.value = 45 + "px"
-      bearStylePosLeft.value = 747 + "px"
-      bearStylePosTop.value = -39 + "px"
-      bearRotate.value = "0"
-      bearStyleSrc.value = "https://avatars.mds.yandex.net/get-mpic/4304254/2a0000018a5e9a3a25e166314e5f55102e92/optimize"
-    }, 15000)
+    pos6()
+    NumberPos = 6
+    console.log(NumberPos)
+ }, 15000)
 }
-setInterval(() => {
 BearTravel()
-},18000)
+function BearTravelInterval() {
+  TimeStopInt.value = setInterval(() => {
+    BearTravel()
+  }, 18000)
+}
+BearTravelInterval()
+function RunBearTravel() {
+  if (NumberPos === 1) {
+     setTimeout(() => {
+      pos2()
+       BearTravelInterval()
+      console.log(NumberPos)
+    }, 3000)
+     setTimeout(() => {
+      pos3()
 
+      console.log(NumberPos)
+    }, 6000)
+     setTimeout(() => {
+      pos4()
+
+      console.log(NumberPos)
+    }, 9000)
+      setTimeout(() => {
+      pos5()
+
+      console.log(NumberPos)
+    }, 12000)
+     setTimeout(() => {
+      pos6()
+
+      console.log(NumberPos)
+    }, 15000)
+  }
+//   if (NumberPos === 2) {
+//     pos3()
+//     pos4()
+//     pos5()
+//     pos6()
+//   }
+//   if (NumberPos === 3) {
+//     pos4()
+//     pos5()
+//     pos6()
+//   }
+//   if (NumberPos === 4) {
+//     pos5()
+//     pos6()
+//   }
+//   if (NumberPos === 5) {
+//     pos6()
+//   }
+//   if (NumberPos === 6) {
+// pos1()
+//   }
+}
 
 let numberTime = ref()
+let FormButtOn = ref()
+let ColdButtOn = ref()
+let UDButtOn = ref()
+let HotButtOn = ref()
+let BoxButtOn = ref()
+
+
+function ActionIfButt() {
+  setInterval(() => {
+    if (Smes.value === "#21BA45") {
+      SmesButtOn.value = "not-allowed"
+    } else {
+      SmesButtOn.value = "pointer"
+    }
+    if (Form.value === "#21BA45") {
+      FormButtOn.value = "not-allowed"
+    } else {
+      FormButtOn.value = "pointer"
+    }
+    if (Cold.value === "#21BA45") {
+      ColdButtOn.value = "not-allowed"
+    } else {
+      ColdButtOn.value = "pointer"
+    }
+    if (Up.value === "#21BA45") {
+      UDButtOn.value = "not-allowed"
+    } else {
+      UDButtOn.value = "pointer"
+    }
+    if (Hot.value === "#21BA45") {
+      HotButtOn.value = "not-allowed"
+    } else {
+      HotButtOn.value = "pointer"
+    }
+    if (Box.value === "#21BA45") {
+      BoxButtOn.value = "not-allowed"
+    } else {
+      BoxButtOn.value = "pointer"
+    }
+}, 99)
+}
+ActionIfButt()
 function UDForm() {
   setInterval(() => {
     if (numberTime.value === 0) {
@@ -299,11 +442,13 @@ function SmesStop() {
   Smes.value = 'orangered'
   clearInterval(interval.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStopInt.value)
+  clearInterval(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 
 }
 function FormStop() {
@@ -315,6 +460,7 @@ function FormStop() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 function ColdStop() {
   Cold.value = 'orangered'
@@ -325,6 +471,7 @@ function ColdStop() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 function UpStop() {
   Up.value = 'orangered'
@@ -335,6 +482,7 @@ function UpStop() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 function HotStop() {
   Hot.value = 'orangered'
@@ -345,6 +493,7 @@ function HotStop() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 function BoxStop() {
   Box.value = 'orangered'
@@ -355,10 +504,20 @@ function BoxStop() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 
 function SmesOn() {
   Smes.value = "#21BA45"
+  // setInterval(TimeStopInt.value)
+  // setTimeout(TimeStop1.value)
+  // setTimeout(TimeStop2.value)
+  // setTimeout(TimeStop3.value)
+  // setTimeout(TimeStop4.value)
+  // setTimeout(TimeStop5.value)
+  clearInterval(interval.value)
+  // BearTravelInterval()
+  RunBearTravel()
 }
 function FormOn() {
   Form.value = "#21BA45"
@@ -391,6 +550,7 @@ function SmesWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  RPMnumSmes = 0
 }
 
 function FormWarn() {
@@ -409,6 +569,7 @@ function FormWarn() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 
 function ColdWarn() {
@@ -427,6 +588,7 @@ function ColdWarn() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 function UpWarn() {
   interval4.value = setInterval(() => {
@@ -444,6 +606,7 @@ function UpWarn() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 function HotWarn() {
   interval5.value = setInterval(() => {
@@ -461,6 +624,7 @@ function HotWarn() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 function BoxWarn() {
   interval6.value = setInterval(() => {
@@ -478,6 +642,7 @@ function BoxWarn() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
 }
 
 function rotateBottomS() {
@@ -509,6 +674,31 @@ function hot() {
 }
 hot()
 rotateBottomC()
+
+function SmesRPM() {
+  setInterval(() => {
+    if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      RPMnumSmes = 100
+      RPMnumSmes = RPMnumSmes + 5
+      setTimeout(() => {
+        RPMnumSmes = RPMnumSmes - 5
+      }, 400)
+      setTimeout(() => {
+        RPMnumSmes = RPMnumSmes - 5
+      }, 800)
+      setTimeout(() => {
+        RPMnumSmes = RPMnumSmes + 5
+      }, 1200)
+      setTimeout(() => {
+        RPMnumSmes = RPMnumSmes + 5
+      }, 1600)
+      setTimeout(() => {
+        RPMnumSmes = RPMnumSmes - 5
+      }, 200)
+    }
+},2500)
+}
+SmesRPM()
 </script>
 
 <style scoped>
@@ -655,6 +845,15 @@ font-size: 18px;
   position: relative;
   left: 20px;
   top: 4px;
+}
+#SmesRPMtar{
+  height: 20px;
+  width: 70px;
+  background-color: black;
+  position: relative;
+  bottom: 20px;
+  font-size: 15px;
+
 }
 
 .FormBlock {
