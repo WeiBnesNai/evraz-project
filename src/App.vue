@@ -48,7 +48,12 @@
       </div>
       <div class="ColdBlock" :style="{ 'background-color': Cold}"> <p>Охлаждение</p>
         <div class="ColdTech">
-          <div id="TopC"></div>
+          <div id="TopC">
+            <div id="ColdTemp"
+                 :style="{ 'color': ColorTextTemp}">
+              {{ColdTempNum}}°
+            </div>
+          </div>
           <div id="middleC"></div>
           <div  id="bottomC">
             <img id="picTurC" :style="{ 'transform': `rotate(${bottomCRotate}deg)`}" src="https://avatars.mds.yandex.net/i?id=06d4eb0640f97077a81e81bce482bda907cdbbf0-5194765-images-thumbs&n=13">
@@ -195,6 +200,8 @@ let interval4 = ref()
 let interval5 = ref()
 let interval6 = ref()
 let intervalhot = ref()
+let ColdTempNum = 0
+let ColorTextTemp = ref("")
 
 
 let udm = ref()
@@ -307,54 +314,132 @@ function BearTravelInterval() {
 }
 BearTravelInterval()
 function RunBearTravel() {
-  if (NumberPos === 1) {
-     setTimeout(() => {
-      pos2()
-       BearTravelInterval()
+  if (NumberPos === 1 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+    BearTravelInterval()
+    console.log(NumberPos)
+  }
+  if (NumberPos === 2 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+
+    setTimeout(() => {
+      NumberPos = 3
+      pos3()
       console.log(NumberPos)
     }, 3000)
-     setTimeout(() => {
-      pos3()
 
-      console.log(NumberPos)
+    setTimeout(() => {
+      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 4
+        pos4()
+        console.log(NumberPos)
+      }
     }, 6000)
-     setTimeout(() => {
-      pos4()
 
-      console.log(NumberPos)
+    setTimeout(() => {
+      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 5
+        pos5()
+        console.log(NumberPos)
+      }
     }, 9000)
-      setTimeout(() => {
-      pos5()
 
-      console.log(NumberPos)
+    setTimeout(() => {
+      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 6
+        pos6()
+        console.log(NumberPos)
+      }
     }, 12000)
-     setTimeout(() => {
-      pos6()
+    setTimeout(() => {
+      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
 
-      console.log(NumberPos)
+        pos1()
+        BearTravelInterval()
+        console.log(NumberPos)
+      }
     }, 15000)
   }
-//   if (NumberPos === 2) {
-//     pos3()
-//     pos4()
-//     pos5()
-//     pos6()
-//   }
-//   if (NumberPos === 3) {
-//     pos4()
-//     pos5()
-//     pos6()
-//   }
-//   if (NumberPos === 4) {
-//     pos5()
-//     pos6()
-//   }
-//   if (NumberPos === 5) {
-//     pos6()
-//   }
-//   if (NumberPos === 6) {
-// pos1()
-//   }
+
+  if (NumberPos === 3 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+    setTimeout(() => {
+      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 4
+        pos4()
+        console.log(NumberPos)
+      }
+    }, 3000)
+
+    setTimeout(() => {
+      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 5
+        pos5()
+        console.log(NumberPos)
+      }
+    }, 6000)
+
+    setTimeout(() => {
+      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 6
+        pos6()
+        console.log(NumberPos)
+      }
+    }, 9000)
+    setTimeout(() => {
+      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 1
+        pos1()
+        BearTravelInterval()
+        console.log(NumberPos)
+      }
+    }, 12000)
+  }
+  if (NumberPos === 4 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+    setTimeout(() => {
+      NumberPos = 5
+      pos5()
+      console.log(NumberPos)
+    }, 3000)
+
+    setTimeout(() => {
+      if (NumberPos === 2 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 6
+        pos6()
+        console.log(NumberPos)
+      }
+    }, 6000)
+    setTimeout(() => {
+      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 1
+        pos1()
+        BearTravelInterval()
+        console.log(NumberPos)
+      }
+    }, 9000)
+  }
+  if (NumberPos === 5 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+    setTimeout(() => {
+      NumberPos = 6
+      pos6()
+      console.log(NumberPos)
+    }, 3000)
+    setTimeout(() => {
+      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 1
+        pos1()
+        BearTravelInterval()
+        console.log(NumberPos)
+      }
+    }, 6000)
+  }
+  if (NumberPos === 6 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+    setTimeout(() => {
+      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+        NumberPos = 1
+        pos1()
+      BearTravelInterval()
+      console.log(NumberPos)
+        }
+    }, 3000)
+  }
 }
 
 let numberTime = ref()
@@ -441,6 +526,7 @@ UDForm()
 function SmesStop() {
   Smes.value = 'orangered'
   clearInterval(interval.value)
+  clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
   clearTimeout(TimeStopInt.value)
   clearInterval(TimeStop1.value)
@@ -449,44 +535,52 @@ function SmesStop() {
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
+  RPMnumSmes = 0
 
 }
 function FormStop() {
   Form.value = 'orangered'
   clearInterval(interval2.value)
+  clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
   RPMnumSmes = 0
 }
 function ColdStop() {
   Cold.value = 'orangered'
   clearInterval(interval3.value)
+  clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
   RPMnumSmes = 0
 }
 function UpStop() {
   Up.value = 'orangered'
   clearInterval(interval4.value)
+  clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
   RPMnumSmes = 0
 }
 function HotStop() {
   Hot.value = 'orangered'
   clearInterval(interval5.value)
+  clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
@@ -494,27 +588,25 @@ function HotStop() {
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
+  RPMnumSmes = 0
 }
 function BoxStop() {
   Box.value = 'orangered'
-  clearInterval(interval6.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearInterval(interval6.value)
+  clearInterval(TimeStopInt.value)
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+
+  RPMnumSmes = 0
   RPMnumSmes = 0
 }
 
 function SmesOn() {
   Smes.value = "#21BA45"
-  // setInterval(TimeStopInt.value)
-  // setTimeout(TimeStop1.value)
-  // setTimeout(TimeStop2.value)
-  // setTimeout(TimeStop3.value)
-  // setTimeout(TimeStop4.value)
-  // setTimeout(TimeStop5.value)
   clearInterval(interval.value)
   // BearTravelInterval()
   RunBearTravel()
@@ -522,22 +614,27 @@ function SmesOn() {
 function FormOn() {
   Form.value = "#21BA45"
   clearInterval(interval2.value)
+  RunBearTravel()
 }
 function ColdOn() {
   Cold.value = "#21BA45"
   clearInterval(interval3.value)
+  RunBearTravel()
 }
 function UpOn() {
   Up.value = "#21BA45"
   clearInterval(interval4.value)
+  RunBearTravel()
 }
 function HotOn() {
   Hot.value = "#21BA45"
   clearInterval(interval5.value)
+  RunBearTravel()
 }
 function BoxOn() {
   Box.value = "#21BA45"
   clearInterval(interval6.value)
+  RunBearTravel()
 }
 function SmesWarn() {
   interval.value = setInterval(() => {
@@ -550,6 +647,12 @@ function SmesWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearInterval(TimeStopInt.value)
+  clearTimeout(TimeStop1.value)
+  clearTimeout(TimeStop2.value)
+  clearTimeout(TimeStop3.value)
+  clearTimeout(TimeStop4.value)
+  clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
 }
 
@@ -564,6 +667,7 @@ function FormWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearInterval(TimeStopInt.value)
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
@@ -583,6 +687,7 @@ function ColdWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearInterval(TimeStopInt.value)
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
@@ -601,6 +706,7 @@ function UpWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearInterval(TimeStopInt.value)
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
@@ -619,6 +725,7 @@ function HotWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearInterval(TimeStopInt.value)
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
@@ -637,6 +744,7 @@ function BoxWarn() {
     }
   }, 500)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  clearInterval(TimeStopInt.value)
   clearTimeout(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
@@ -699,6 +807,14 @@ function SmesRPM() {
 },2500)
 }
 SmesRPM()
+
+ColdTempNum = -23
+
+function ColdTempR() {
+
+}
+
+
 </script>
 
 <style scoped>
@@ -965,6 +1081,14 @@ font-size: 18px;
   position: relative;
   bottom: 280px;
   left: 23px;
+}
+#ColdTemp {
+width: 70px;
+  height: 30px;
+  background-color: black;
+
+  z-index: +30;
+
 }
 #TopC{
   background-color: grey;
