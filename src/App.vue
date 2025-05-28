@@ -69,14 +69,22 @@
       </div>
       <div class="HotBlock" :style="{ 'background-color': Hot}"> <p>Сушка</p>
         <div class="HotTech">
-          <div id="TopH"></div>
+          <div id="TopH">
+            <div id="HotTempBlock">
+              {{HotTemp}}°
+            </div>
+            <div id="HotTime">
+              {{HotTime}}:00
+            </div>
+          </div>
           <div id="middleH"></div>
           <div  id="bottomH" :style="{ 'background-color': Hot1}"></div>
         </div>
       </div>
       <div class="BoxBlock" :style="{ 'background-color': Box}"> <p>Упаковка</p>
         <div class="BoxTech">
-          <div id="TopB"></div>
+          <div id="TopB">
+          </div>
           <div id="middleB"></div>
           <div  id="bottomB"></div>
         </div>
@@ -97,7 +105,7 @@
       <button class="ButtonOff"
       @click ='SmesStop'
       >Смеситель Стоп</button>
-      <button class="ButtonWarn"
+      <button :style="{'cursor': SmesWarnCur}"  class="ButtonWarn"
       @click = 'SmesWarn'
       >Смеситель Авария</button>
     </div>
@@ -110,7 +118,7 @@
         <button class="ButtonOff"
                 @click = 'FormStop'
         >Формовка Стоп</button>
-        <button class="ButtonWarn"
+        <button :style="{'cursor': FormWarnCur}"  class="ButtonWarn"
         @click = 'FormWarn'
         >Формовка Авария</button>
       </div>
@@ -123,7 +131,7 @@
         <button class="ButtonOff"
         @click = 'ColdStop'
         >Охлаждение Стоп</button>
-        <button class="ButtonWarn"
+        <button :style="{'cursor': ColdWarnCur}"  class="ButtonWarn"
                 @click = 'ColdWarn'
         >Охлаждение Авария</button>
       </div>
@@ -136,7 +144,7 @@
         <button class="ButtonOff"
         @click = 'UpStop'
         >Извлечение Стоп</button>
-        <button class="ButtonWarn"
+        <button :style="{'cursor': UPWarnCur}"  class="ButtonWarn"
                 @click = 'UpWarn'
         >Извлечение Авария</button>
       </div>
@@ -148,7 +156,7 @@
         >Сушка Вкл</button>
         <button class="ButtonOff"
          @click = 'HotStop'>Сушка Стоп</button>
-        <button class="ButtonWarn"
+        <button :style="{'cursor': HotWarnCur}"  class="ButtonWarn"
                 @click = 'HotWarn'
         >Сушка Авария</button>
       </div>
@@ -161,7 +169,9 @@
         <button class="ButtonOff"
         @click = 'BoxStop'
         >Упаковка Стоп</button>
-        <button class="ButtonWarn"
+        <button
+          :style="{'cursor': BoxWarnCur}"
+          class="ButtonWarn"
                 @click = 'BoxWarn'
         >Упаковка Авария</button>
       </div>
@@ -201,9 +211,16 @@ let interval5 = ref()
 let interval6 = ref()
 let intervalhot = ref()
 let ColdTempNum = 0
+let HotTemp = 21
+let HotTime = 0
 let ColorTextTemp = ref("")
 
-
+let SmesWarnCur = ref('')
+let FormWarnCur = ref('')
+let ColdWarnCur = ref('')
+let UPWarnCur = ref('')
+let HotWarnCur = ref('')
+let BoxWarnCur = ref('')
 let udm = ref()
 Smes.value = "#21BA45"
 Form.value = "#21BA45"
@@ -212,6 +229,7 @@ Up.value = "#21BA45"
 Hot.value = "#21BA45"
 Box.value = "#21BA45"
 Hot1.value = "rgb(250, 50, 50, 45%)"
+ColorTextTemp.value = 'rgb(250, 50, 50)'
 
 let bearStyleSrc = ref("")
 let bearStyleStyleHeight = ref("")
@@ -229,6 +247,12 @@ let TimeStop = ref()
 let RPMnumSmes = 0
 let TimeStopInt = ref()
 
+let rotateButtScont = ref()
+let RPMsmesContr = ref()
+let UDformOwContr = ref()
+let UDformMidContr = ref()
+let UDformBottContr = ref()
+
 
 let NumberPos = 0
 function pos1() {
@@ -237,24 +261,43 @@ function pos1() {
   bearStylePosTop.value = 0 + "px"
   bearStyleStyleHeight.value = 20 + "px"
   bearStyleStyleWidth.value = 120 + "px"
+  rotateBottomS()
+  RPMnumSmes = 100
+  SmesRPM()
+  HotTime = 0
 }
 function pos2() {
   bearStylePosLeft.value = 140 + "px"
   bearStylePosTop.value = 14 + "px"
   bearStyleStyleHeight.value = 20 + "px"
   bearStyleStyleWidth.value = 120 + "px"
+  clearInterval(rotateButtScont.value)
+  clearInterval(RPMsmesContr.value)
+  RPMnumSmes = 0
+  UDForm()
+  clearInterval(rotateButtScont.value)
 }
+
 function pos3() {
   bearStylePosLeft.value = 280 + "px"
   bearStylePosTop.value = 18 + "px"
   bearStyleStyleHeight.value = 20 + "px"
   bearStyleStyleWidth.value = 120 + "px"
+  RPMnumSmes = 0
+  clearInterval(UDformOwContr.value)
+  clearInterval(UDformMidContr.value)
+  clearInterval(UDformBottContr.value)
+  rotateBottomC()
+  ColdHot()
 }
+
 function pos4() {
   bearStyleStyleHeight.value = 25 + "px"
   bearStyleStyleWidth.value = 40 + "px"
   bearStylePosLeft.value = 459 + "px"
   bearStylePosTop.value = -10 + "px"
+  clearInterval(rotateButtCocont.value)
+  HotCold()
   bearStyleSrc.value = "https://media.istockphoto.com/id/1302390177/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BE%D1%80%D0%B0%D0%BD%D0%B6%D0%B5%D0%B2%D1%8B%D0%B9-%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B8%D0%B9-%D0%BC%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%8C-%D0%B6%D0%B5%D0%BB%D0%B5-%D1%81%D0%BB%D0%B0%D0%B4%D0%BA%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BD%D1%84%D0%B5%D1%82%D1%8B-%D1%81-%D1%83%D0%B4%D0%B8%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%BC-%D0%B2%D0%BA%D1%83%D1%81%D0%BE%D0%BC-%D0%BF%D0%BB%D0%BE%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD.jpg?s=612x612&w=0&k=20&c=Kd9x56zTT8NoEQPS4txp4XFVdIca29zq8MhdvuKUw38="
 
 }
@@ -264,6 +307,8 @@ function pos5() {
   bearStylePosLeft.value = 603 + "px"
   bearStylePosTop.value = 0 + "px"
   bearRotate.value = "90"
+  hot()
+  HotTimeAndTempR()
 }
 function pos6() {
   bearStyleStyleHeight.value = 45 + "px"
@@ -272,15 +317,127 @@ function pos6() {
   bearStylePosTop.value = -39 + "px"
   bearRotate.value = "0"
   bearStyleSrc.value = "https://avatars.mds.yandex.net/get-mpic/4304254/2a0000018a5e9a3a25e166314e5f55102e92/optimize"
+  clearInterval(HotContr.value)
+
+  Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 
 
+function HotTimeAndTempR() {
+  HotTime = HotTime +3
+  setTimeout(() => {
+    HotTime = HotTime -1
+  },900)
+  setTimeout(() => {
+    HotTime = HotTime -1
+  },1800)
+  setTimeout(() => {
+    HotTime = HotTime -1
+  },2700)
+  setTimeout(() => {
+    HotTempReverse()
+  },3000)
+
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },100)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },200)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },300)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },400)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },500)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },600)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },700)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },800)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },900)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },1000)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },1100)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },1200)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },1300)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },1400)
+  setTimeout(() => {
+    HotTemp = HotTemp +1
+  },1500)
+}
+function HotTempReverse() {
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },100)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },200)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },300)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },400)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },500)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },600)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },700)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },800)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },900)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },1000)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },1100)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },1200)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },1300)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },1400)
+  setTimeout(() => {
+    HotTemp = HotTemp -1
+  },1500)
+}
 bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
 function BearTravel() {
 pos1()
   NumberPos = 1
   console.log(NumberPos)
   TimeStop1.value = setTimeout(() => {
+
     pos2()
     NumberPos = 2
     console.log(NumberPos)
@@ -482,11 +639,51 @@ function ActionIfButt() {
     } else {
       BoxButtOn.value = "pointer"
     }
+    if (Smes.value === "red" || Smes.value === "black" ) {
+      SmesWarnCur.value = 'not-allowed'
+    }
+    else {
+      SmesWarnCur.value = 'pointer'
+    }
+    if (Form.value === "red" || Form.value === "black") {
+      FormWarnCur.value = 'not-allowed'
+    }
+    else {
+      FormWarnCur.value = 'pointer'
+    }
+    if (Cold.value === "red" || Cold.value === "black") {
+      ColdWarnCur.value = 'not-allowed'
+    }
+    else {
+      ColdWarnCur.value = 'pointer'
+    }
+    if (Up.value === "red" || Up.value === "black") {
+      UPWarnCur.value = 'not-allowed'
+    }
+    else {
+      UPWarnCur.value = 'pointer'
+    }
+    if (Hot.value === "red" || Hot.value === "black") {
+      HotWarnCur.value = 'not-allowed'
+    }
+    else {
+      HotWarnCur.value = 'pointer'
+    }
+    if (Box.value === "red" || Box.value === "black") {
+      BoxWarnCur.value = 'not-allowed'
+    }
+    else {
+      BoxWarnCur.value = 'pointer'
+    }
+
+
 }, 99)
 }
 ActionIfButt()
+
+
 function UDForm() {
-  setInterval(() => {
+  UDformOwContr.value = setInterval(() => {
     if (numberTime.value === 0) {
       let rect = udm.value.getBoundingClientRect()
       let newTop = rect.height = 90
@@ -497,9 +694,9 @@ function UDForm() {
       let newTop = rect.height = 100
       udm.value.style.height = newTop + 'px'
     }
-  }, 1)
+  }, 9)
   // console.log(1)
-  setInterval(() => {
+  UDformMidContr.value = setInterval(() => {
     // console.log(1.5)
       if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
       let rect = udm.value.getBoundingClientRect()
@@ -507,9 +704,9 @@ function UDForm() {
       udm.value.style.height = newTop + 'px'
         numberTime.value = 1
     }
-  }, 900)
+  }, 700)
   // console.log(2)
-  setInterval(() => {
+  UDformBottContr.value = setInterval(() => {
     if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
       // console.log(2.5)
       let rect = udm.value.getBoundingClientRect()
@@ -518,10 +715,10 @@ function UDForm() {
       numberTime.value = 0
     }
 
-  }, 1800)
+  }, 1400)
   // console.log(3)
 }
-UDForm()
+
 
 function SmesStop() {
   Smes.value = 'orangered'
@@ -550,6 +747,7 @@ function FormStop() {
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
   RPMnumSmes = 0
+
 }
 function ColdStop() {
   Cold.value = 'orangered'
@@ -563,6 +761,7 @@ function ColdStop() {
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
   RPMnumSmes = 0
+
 }
 function UpStop() {
   Up.value = 'orangered'
@@ -576,6 +775,7 @@ function UpStop() {
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
   RPMnumSmes = 0
+
 }
 function HotStop() {
   Hot.value = 'orangered'
@@ -589,6 +789,7 @@ function HotStop() {
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
   RPMnumSmes = 0
+
 }
 function BoxStop() {
   Box.value = 'orangered'
@@ -600,9 +801,9 @@ function BoxStop() {
   clearTimeout(TimeStop3.value)
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
+  RPMnumSmes = 0
+  RPMnumSmes = 0
 
-  RPMnumSmes = 0
-  RPMnumSmes = 0
 }
 
 function SmesOn() {
@@ -610,31 +811,37 @@ function SmesOn() {
   clearInterval(interval.value)
   // BearTravelInterval()
   RunBearTravel()
+
 }
 function FormOn() {
   Form.value = "#21BA45"
   clearInterval(interval2.value)
   RunBearTravel()
+
 }
 function ColdOn() {
   Cold.value = "#21BA45"
   clearInterval(interval3.value)
   RunBearTravel()
+
 }
 function UpOn() {
   Up.value = "#21BA45"
   clearInterval(interval4.value)
   RunBearTravel()
+
 }
 function HotOn() {
   Hot.value = "#21BA45"
   clearInterval(interval5.value)
   RunBearTravel()
+
 }
 function BoxOn() {
   Box.value = "#21BA45"
   clearInterval(interval6.value)
   RunBearTravel()
+
 }
 function SmesWarn() {
   interval.value = setInterval(() => {
@@ -654,6 +861,7 @@ function SmesWarn() {
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
+
 }
 
 function FormWarn() {
@@ -674,6 +882,7 @@ function FormWarn() {
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
+
 }
 
 function ColdWarn() {
@@ -694,6 +903,7 @@ function ColdWarn() {
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
+
 }
 function UpWarn() {
   interval4.value = setInterval(() => {
@@ -713,6 +923,7 @@ function UpWarn() {
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
+
 }
 function HotWarn() {
   interval5.value = setInterval(() => {
@@ -732,6 +943,7 @@ function HotWarn() {
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
+
 }
 function BoxWarn() {
   interval6.value = setInterval(() => {
@@ -751,24 +963,28 @@ function BoxWarn() {
   clearTimeout(TimeStop4.value)
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
+
 }
 
+
 function rotateBottomS() {
-  setInterval(() => {
+  rotateButtScont.value = setInterval(() => {
     if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45")
     bottomSRotate.value += 5
   }, 25)
 }
 
-rotateBottomS()
+let rotateButtCocont = ref()
 function rotateBottomC() {
-  setInterval(() => {
+  rotateButtCocont.value = setInterval(() => {
     if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45")
     bottomCRotate.value += 15
   }, 25)
 }
+
+let HotContr = ref()
 function hot() {
-  intervalhot.value = setInterval(() => {
+  HotContr.value = intervalhot.value = setInterval(() => {
     if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45"){
     if (Hot1.value === "rgb(250, 50, 50, 45%)") {
       Hot1.value = "rgb(250, 50, 50, 69%)"
@@ -777,14 +993,12 @@ function hot() {
       Hot1.value = "rgb(250, 50, 50, 45%)"
 
     }  }
-  }, 900)
+  }, 700)
 
 }
-hot()
-rotateBottomC()
 
 function SmesRPM() {
-  setInterval(() => {
+  RPMsmesContr.value = setInterval(() => {
     if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
       RPMnumSmes = 100
       RPMnumSmes = RPMnumSmes + 5
@@ -806,18 +1020,123 @@ function SmesRPM() {
     }
 },2500)
 }
-SmesRPM()
 
-ColdTempNum = -23
-
-function ColdTempR() {
-
+ColdTempNum = 21
+function ColdHot() {
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 1
+    }, 100)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 2
+    }, 300)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 3
+    }, 500)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 4
+    }, 700)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 5
+    }, 900)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 6
+    }, 1100)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 5
+      ColorTextTemp.value = "cornflowerblue"
+    }, 1300)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 4
+    }, 1500)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 3
+    }, 1700)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 3
+    }, 1900)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 3
+    }, 2100)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 3
+    }, 2300)
+    setTimeout(() => {
+      ColdTempNum = ColdTempNum - 3
+    }, 2500)
 }
 
+function HotCold() {
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 1
+  }, 100)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 2
+  }, 400)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 3
+  }, 700)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 4
+  }, 1000)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 5
+  }, 1300)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 6
+  }, 1700)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 5
+    ColorTextTemp.value = "rgb(250, 50, 50)"
+  }, 2000)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 4
+  }, 2300)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 3
+  }, 2600)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 3
+  }, 2900)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 3
+  }, 3200)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 3
+  }, 3500)
+  setTimeout(() => {
+    ColdTempNum = ColdTempNum + 3
+  }, 3800)
+}
+let ColdTempRcontr = ref()
+// function ColdTempR() {
+//   ColdTempRcontr.value = setInterval(() => {
+//     ColdTempNum = ColdTempNum - 1
+//     setTimeout(() => {
+//       ColdTempNum = ColdTempNum - 1
+//     }, 700)
+//     setTimeout(() => {
+//       ColdTempNum = ColdTempNum + 2
+//     }, 1400)
+//     setTimeout(() => {
+//       ColdTempNum = ColdTempNum - 1
+//     }, 2100)
+//     setTimeout(() => {
+//       ColdTempNum = ColdTempNum - 1
+//     }, 2800)
+//     setTimeout(() => {
+//       ColdTempNum = ColdTempNum + 1
+//     }, 3500)
+//     setTimeout(() => {
+//       ColdTempNum = ColdTempNum + 1
+//     }, 4200)
+//   },7000)
+// }
 
 </script>
 
 <style scoped>
+
+
 .Txt {
   text-decoration: Canvas;
   cursor: context-menu;
@@ -1158,6 +1477,20 @@ border: #1D1D1D solid 1px;
   background-color: grey;
   height: 120px;
   width: 70px;
+}
+#HotTempBlock {
+  width: 70px;
+  height: 30px;
+  background-color: black;
+}
+#HotTime{
+  position: relative;
+  top: 9px;
+  width: 70px;
+  height: 30px;
+  background-color: black;
+  font-style: italic;
+  color: #C10015;
 }
 #middleH{
   background-color: #1D1D1D;
