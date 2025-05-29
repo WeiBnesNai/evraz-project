@@ -255,13 +255,13 @@ let UDformBottContr = ref()
 
 
 let NumberPos = 0
+
 function pos1() {
   bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
   bearStylePosLeft.value = 0 + "px"
   bearStylePosTop.value = 0 + "px"
   bearStyleStyleHeight.value = 20 + "px"
   bearStyleStyleWidth.value = 120 + "px"
-  rotateBottomS()
   RPMnumSmes = 100
   SmesRPM()
   HotTime = 0
@@ -275,7 +275,6 @@ function pos2() {
   clearInterval(RPMsmesContr.value)
   RPMnumSmes = 0
   UDForm()
-  clearInterval(rotateButtScont.value)
 }
 
 function pos3() {
@@ -289,6 +288,13 @@ function pos3() {
   clearInterval(UDformBottContr.value)
   rotateBottomC()
   ColdHot()
+  numberTime.value = 0
+  let rect = udm.value.getBoundingClientRect()
+  let newTop = rect.height = 90
+  udm.value.style.height = newTop + 'px'
+  clearInterval(rotateButtScont.value)
+  clearInterval(RPMsmesContr.value)
+  RPMnumSmes = 0
 }
 
 function pos4() {
@@ -309,6 +315,7 @@ function pos5() {
   bearRotate.value = "90"
   hot()
   HotTimeAndTempR()
+
 }
 function pos6() {
   bearStyleStyleHeight.value = 45 + "px"
@@ -318,7 +325,6 @@ function pos6() {
   bearRotate.value = "0"
   bearStyleSrc.value = "https://avatars.mds.yandex.net/get-mpic/4304254/2a0000018a5e9a3a25e166314e5f55102e92/optimize"
   clearInterval(HotContr.value)
-
   Hot1.value = "rgb(250, 50, 50, 45%)"
 }
 
@@ -433,11 +439,23 @@ function HotTempReverse() {
 }
 bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
 function BearTravel() {
+  clearInterval(TimeStopInt.value)
+  clearInterval(TimeStop1.value)
+  clearInterval(TimeStop2.value)
+  clearInterval(TimeStop3.value)
+  clearInterval(TimeStop4.value)
+  clearInterval(TimeStop5.value)
+
+
+
 pos1()
   NumberPos = 1
   console.log(NumberPos)
+  rotateBottomS()
   TimeStop1.value = setTimeout(() => {
-
+    clearInterval(rotateButtScont.value)
+    clearInterval(RPMsmesContr.value)
+    RPMnumSmes = 0
     pos2()
     NumberPos = 2
     console.log(NumberPos)
@@ -465,9 +483,7 @@ pos1()
 }
 BearTravel()
 function BearTravelInterval() {
-  TimeStopInt.value = setInterval(() => {
-    BearTravel()
-  }, 18000)
+  TimeStopInt.value = setInterval(BearTravel, 18000)
 }
 BearTravelInterval()
 function RunBearTravel() {
@@ -508,8 +524,6 @@ function RunBearTravel() {
     }, 12000)
     setTimeout(() => {
       if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-
-        pos1()
         BearTravelInterval()
         console.log(NumberPos)
       }
@@ -543,7 +557,7 @@ function RunBearTravel() {
     setTimeout(() => {
       if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
         NumberPos = 1
-        pos1()
+
         BearTravelInterval()
         console.log(NumberPos)
       }
@@ -557,7 +571,7 @@ function RunBearTravel() {
     }, 3000)
 
     setTimeout(() => {
-      if (NumberPos === 2 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
         NumberPos = 6
         pos6()
         console.log(NumberPos)
@@ -566,7 +580,7 @@ function RunBearTravel() {
     setTimeout(() => {
       if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
         NumberPos = 1
-        pos1()
+
         BearTravelInterval()
         console.log(NumberPos)
       }
@@ -581,7 +595,7 @@ function RunBearTravel() {
     setTimeout(() => {
       if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
         NumberPos = 1
-        pos1()
+
         BearTravelInterval()
         console.log(NumberPos)
       }
@@ -591,8 +605,8 @@ function RunBearTravel() {
     setTimeout(() => {
       if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
         NumberPos = 1
-        pos1()
-      BearTravelInterval()
+
+        BearTravelInterval()
       console.log(NumberPos)
         }
     }, 3000)
@@ -725,7 +739,7 @@ function SmesStop() {
   clearInterval(interval.value)
   clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearTimeout(TimeStopInt.value)
+  // clearTimeout(TimeStopInt.value)
   clearInterval(TimeStop1.value)
   clearTimeout(TimeStop2.value)
   clearTimeout(TimeStop3.value)
@@ -733,6 +747,7 @@ function SmesStop() {
   clearTimeout(TimeStop5.value)
   RPMnumSmes = 0
   RPMnumSmes = 0
+
 
 }
 function FormStop() {
