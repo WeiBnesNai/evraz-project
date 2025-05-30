@@ -1,6 +1,11 @@
-<template>
+<template id="cont">
+
+
+
   <div id="app">
 <!--    <FabricCanvas />-->
+    <div id="container">
+      <div id="BackGround"></div>
     <div id="Bear">
       <img id ='bear1' :src = bearStyleSrc
            :style="{ 'left':bearStylePosLeft, 'top':bearStylePosTop, 'height':bearStyleStyleHeight, 'width':bearStyleStyleWidth,
@@ -10,15 +15,19 @@
       >
     </div>
     <div class="Con">
+      <div id="OwPanel"></div>
+
       <div id="left"></div>
       <div id="right"></div>
-      <div class="SmesBlock" :style="{ 'background-color': Smes}"> <p>Смеситель</p>
+      <div class="SmesBlock" :style="{ 'background-color': Smes}">
+        <p>Смеситель</p>
+        <div id="SmesRPMtar">
+          <p id="RpmTxt">RPM: {{RPMnumSmes}}</p>
+        </div>
       <div class="SmesTech">
 
         <div id="TopS">
-          <div id="SmesRPMtar">
-            <p id="RpmTxt">RPM: {{RPMnumSmes}}</p>
-          </div>
+
           <div class="water">
             <div class="ripple-one"></div>
             <div class="ripple-two"></div>
@@ -38,27 +47,34 @@
       </div>
       </div>
       <div class="FormBlock" :style="{ 'background-color': Form}"> <p>Формовка</p>
+
         <div class="FormTech">
+
           <div id="TopF"></div>
           <div   id="middleF">
             <div ref="udm" id="middleF1" ></div>
             <div id="bottomF"></div>
+
           </div>
+
       </div>
       </div>
       <div class="ColdBlock" :style="{ 'background-color': Cold}"> <p>Охлаждение</p>
+
         <div class="ColdTech">
           <div id="TopC">
-            <div id="ColdTemp"
-                 :style="{ 'color': ColorTextTemp}">
-              {{ColdTempNum}}°
-            </div>
+
           </div>
           <div id="middleC"></div>
           <div  id="bottomC">
             <img id="picTurC" :style="{ 'transform': `rotate(${bottomCRotate}deg)`}" src="https://avatars.mds.yandex.net/i?id=06d4eb0640f97077a81e81bce482bda907cdbbf0-5194765-images-thumbs&n=13">
           </div>
+          <div id="ColdTemp"
+               :style="{ 'color': ColorTextTemp}">
+            {{ColdTempNum}}°
+          </div>
         </div>
+
       </div>
       <div class="UpBlock" :style="{ 'background-color': Up}"> <p>Извлечение</p>
         <div class="UpTech">
@@ -70,16 +86,18 @@
       <div class="HotBlock" :style="{ 'background-color': Hot}"> <p>Сушка</p>
         <div class="HotTech">
           <div id="TopH">
-            <div id="HotTempBlock">
-              {{HotTemp}}°
-            </div>
             <div id="HotTime">
               {{HotTime}}:00
             </div>
           </div>
           <div id="middleH"></div>
           <div  id="bottomH" :style="{ 'background-color': Hot1}"></div>
+          <div id="HotTempBlock">
+            {{HotTemp}}°
+          </div>
+
         </div>
+
       </div>
       <div class="BoxBlock" :style="{ 'background-color': Box}"> <p>Упаковка</p>
         <div class="BoxTech">
@@ -92,7 +110,7 @@
 
     </div>
 
-
+      <div id="ControlPanelBackGround"></div>
 
     <div class="ControlButtonPlate">
 
@@ -180,19 +198,11 @@
         class="Txt">Control Panel</a>
     </div>
 
-
-
+  </div>
   </div>
 </template>
 <script setup>
 import { ref } from 'vue'
-// import FabricCanvas from './components/FabricCanvas.vue';
-// export default {
-//   name: 'App',
-//   components: {
-//     FabricCanvas,
-//   },
-// };
 let SmesButtOn = ref('')
 let Smes = ref('')
 let Form = ref('')
@@ -238,13 +248,7 @@ let bearStylePosLeft = ref("")
 let bearStylePosTop = ref("")
 let bearStyleStyleZ = ref("")
 let bearRotate = ref("")
-let TimeStop1 = ref()
-let TimeStop2 = ref()
-let TimeStop3 = ref()
-let TimeStop4 = ref()
-let TimeStop5 = ref()
-let TimeStop = ref()
-let RPMnumSmes = 0
+let RPMnumSmes = 72
 let TimeStopInt = ref()
 
 let rotateButtScont = ref()
@@ -253,20 +257,24 @@ let UDformOwContr = ref()
 let UDformMidContr = ref()
 let UDformBottContr = ref()
 
-
-let NumberPos = 0
+rotateBottomS()
+SmesRPM()
+let NumberPos = 1
 
 function pos1() {
+  NumberPos = 1
   bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
   bearStylePosLeft.value = 0 + "px"
   bearStylePosTop.value = 0 + "px"
   bearStyleStyleHeight.value = 20 + "px"
   bearStyleStyleWidth.value = 120 + "px"
-  RPMnumSmes = 100
+  RPMnumSmes = 72
+  rotateBottomS()
   SmesRPM()
   HotTime = 0
 }
 function pos2() {
+  NumberPos = 2
   bearStylePosLeft.value = 140 + "px"
   bearStylePosTop.value = 14 + "px"
   bearStyleStyleHeight.value = 20 + "px"
@@ -278,6 +286,7 @@ function pos2() {
 }
 
 function pos3() {
+  NumberPos = 3
   bearStylePosLeft.value = 280 + "px"
   bearStylePosTop.value = 18 + "px"
   bearStyleStyleHeight.value = 20 + "px"
@@ -298,6 +307,7 @@ function pos3() {
 }
 
 function pos4() {
+  NumberPos = 4
   bearStyleStyleHeight.value = 25 + "px"
   bearStyleStyleWidth.value = 40 + "px"
   bearStylePosLeft.value = 459 + "px"
@@ -308,6 +318,7 @@ function pos4() {
 
 }
 function pos5() {
+  NumberPos = 5
   bearStyleStyleHeight.value = 25 + "px"
   bearStyleStyleWidth.value = 40 + "px"
   bearStylePosLeft.value = 603 + "px"
@@ -318,6 +329,7 @@ function pos5() {
 
 }
 function pos6() {
+  NumberPos = 6
   bearStyleStyleHeight.value = 45 + "px"
   bearStyleStyleWidth.value = 45 + "px"
   bearStylePosLeft.value = 747 + "px"
@@ -326,11 +338,12 @@ function pos6() {
   bearStyleSrc.value = "https://avatars.mds.yandex.net/get-mpic/4304254/2a0000018a5e9a3a25e166314e5f55102e92/optimize"
   clearInterval(HotContr.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
+  HotTime = 0
 }
 
 
 function HotTimeAndTempR() {
-  HotTime = HotTime +3
+  HotTime = HotTime +6
   setTimeout(() => {
     HotTime = HotTime -1
   },900)
@@ -341,8 +354,17 @@ function HotTimeAndTempR() {
     HotTime = HotTime -1
   },2700)
   setTimeout(() => {
+    HotTime = HotTime -1
+  },3600)
+  setTimeout(() => {
+    HotTime = HotTime -1
+  },4500)
+  setTimeout(() => {
+    HotTime = HotTime -1
+  },5400)
+  setTimeout(() => {
     HotTempReverse()
-  },3000)
+  },6000)
 
   setTimeout(() => {
     HotTemp = HotTemp +1
@@ -439,179 +461,49 @@ function HotTempReverse() {
 }
 bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
 function BearTravel() {
-  clearInterval(TimeStopInt.value)
-  clearInterval(TimeStop1.value)
-  clearInterval(TimeStop2.value)
-  clearInterval(TimeStop3.value)
-  clearInterval(TimeStop4.value)
-  clearInterval(TimeStop5.value)
-
-
-
-pos1()
-  NumberPos = 1
   console.log(NumberPos)
-  rotateBottomS()
-  TimeStop1.value = setTimeout(() => {
-    clearInterval(rotateButtScont.value)
-    clearInterval(RPMsmesContr.value)
-    RPMnumSmes = 0
-    pos2()
-    NumberPos = 2
-    console.log(NumberPos)
-    }, 3000)
-  TimeStop2.value = setTimeout(() => {
-    pos3()
-    NumberPos = 3
-    console.log(NumberPos)
-    }, 6000)
-  TimeStop3.value = setTimeout(() => {
-    pos4()
-    NumberPos = 4
-    console.log(NumberPos)
- }, 9000)
-  TimeStop4.value =  setTimeout(() => {
-    pos5()
-    NumberPos = 5
-    console.log(NumberPos)
-    }, 12000)
-  TimeStop5.value = setTimeout(() => {
-    pos6()
-    NumberPos = 6
-    console.log(NumberPos)
- }, 15000)
+  TimeStopInt.value = setInterval(() => {
+    if (NumberPos === 1 ) {
+
+      setTimeout(() => {
+        pos2()
+      }, 3000)
+    }
+    if (NumberPos === 2 ) {
+
+      setTimeout(() => {
+        pos3()
+      }, 3000)
+    }
+    if (NumberPos === 3 ) {
+
+    setTimeout(() => {
+      pos4()
+    },3000)
+      }
+    if (NumberPos === 4 ) {
+
+      setTimeout(() => {
+        pos5()
+      }, 3000)
+    }
+    if (NumberPos === 5 ) {
+
+      setTimeout(() => {
+        pos6()
+      }, 3000)
+    }
+    if (NumberPos === 6 ) {
+
+      setTimeout(() => {
+        pos1()
+      }, 3000)
+    }
+},6000)
+
 }
+
 BearTravel()
-function BearTravelInterval() {
-  TimeStopInt.value = setInterval(BearTravel, 18000)
-}
-BearTravelInterval()
-function RunBearTravel() {
-  if (NumberPos === 1 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-    BearTravelInterval()
-    console.log(NumberPos)
-  }
-  if (NumberPos === 2 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-
-    setTimeout(() => {
-      NumberPos = 3
-      pos3()
-      console.log(NumberPos)
-    }, 3000)
-
-    setTimeout(() => {
-      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 4
-        pos4()
-        console.log(NumberPos)
-      }
-    }, 6000)
-
-    setTimeout(() => {
-      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 5
-        pos5()
-        console.log(NumberPos)
-      }
-    }, 9000)
-
-    setTimeout(() => {
-      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 6
-        pos6()
-        console.log(NumberPos)
-      }
-    }, 12000)
-    setTimeout(() => {
-      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        BearTravelInterval()
-        console.log(NumberPos)
-      }
-    }, 15000)
-  }
-
-  if (NumberPos === 3 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-    setTimeout(() => {
-      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 4
-        pos4()
-        console.log(NumberPos)
-      }
-    }, 3000)
-
-    setTimeout(() => {
-      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 5
-        pos5()
-        console.log(NumberPos)
-      }
-    }, 6000)
-
-    setTimeout(() => {
-      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 6
-        pos6()
-        console.log(NumberPos)
-      }
-    }, 9000)
-    setTimeout(() => {
-      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 1
-
-        BearTravelInterval()
-        console.log(NumberPos)
-      }
-    }, 12000)
-  }
-  if (NumberPos === 4 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-    setTimeout(() => {
-      NumberPos = 5
-      pos5()
-      console.log(NumberPos)
-    }, 3000)
-
-    setTimeout(() => {
-      if (Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 6
-        pos6()
-        console.log(NumberPos)
-      }
-    }, 6000)
-    setTimeout(() => {
-      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 1
-
-        BearTravelInterval()
-        console.log(NumberPos)
-      }
-    }, 9000)
-  }
-  if (NumberPos === 5 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-    setTimeout(() => {
-      NumberPos = 6
-      pos6()
-      console.log(NumberPos)
-    }, 3000)
-    setTimeout(() => {
-      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 1
-
-        BearTravelInterval()
-        console.log(NumberPos)
-      }
-    }, 6000)
-  }
-  if (NumberPos === 6 & Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-    setTimeout(() => {
-      if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-        NumberPos = 1
-
-        BearTravelInterval()
-      console.log(NumberPos)
-        }
-    }, 3000)
-  }
-}
 
 let numberTime = ref()
 let FormButtOn = ref()
@@ -619,7 +511,6 @@ let ColdButtOn = ref()
 let UDButtOn = ref()
 let HotButtOn = ref()
 let BoxButtOn = ref()
-
 
 function ActionIfButt() {
   setInterval(() => {
@@ -691,7 +582,7 @@ function ActionIfButt() {
     }
 
 
-}, 99)
+}, 9)
 }
 ActionIfButt()
 
@@ -740,11 +631,7 @@ function SmesStop() {
   clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
   // clearTimeout(TimeStopInt.value)
-  clearInterval(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
+
   RPMnumSmes = 0
   RPMnumSmes = 0
 
@@ -755,11 +642,7 @@ function FormStop() {
   clearInterval(interval2.value)
   clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
+
   RPMnumSmes = 0
   RPMnumSmes = 0
 
@@ -769,11 +652,7 @@ function ColdStop() {
   clearInterval(interval3.value)
   clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
+
   RPMnumSmes = 0
   RPMnumSmes = 0
 
@@ -783,11 +662,7 @@ function UpStop() {
   clearInterval(interval4.value)
   clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
+
   RPMnumSmes = 0
   RPMnumSmes = 0
 
@@ -797,11 +672,7 @@ function HotStop() {
   clearInterval(interval5.value)
   clearInterval(TimeStopInt.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
+
   RPMnumSmes = 0
   RPMnumSmes = 0
 
@@ -811,174 +682,206 @@ function BoxStop() {
   Hot1.value = "rgb(250, 50, 50, 45%)"
   clearInterval(interval6.value)
   clearInterval(TimeStopInt.value)
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
+
   RPMnumSmes = 0
   RPMnumSmes = 0
 
 }
 
 function SmesOn() {
-  Smes.value = "#21BA45"
-  clearInterval(interval.value)
-  // BearTravelInterval()
-  RunBearTravel()
-
+  if (SmesButtOn.value === "not-allowed") {
+    alert("Блок «Смеситель» уже включен!")
+  }
+  else {
+    Smes.value = "#21BA45"
+    clearInterval(interval.value)
+    // BearTravelInterval()
+    if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45"
+    & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      BearTravel()
+    }
+  }
 }
 function FormOn() {
-  Form.value = "#21BA45"
-  clearInterval(interval2.value)
-  RunBearTravel()
-
+  if (FormButtOn.value === "not-allowed") {
+    alert("Блок «Формовка» уже включен!")
+  }
+  else {
+    Form.value = "#21BA45"
+    clearInterval(interval2.value)
+    if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45"
+      & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      BearTravel()
+    }
+  }
 }
 function ColdOn() {
-  Cold.value = "#21BA45"
-  clearInterval(interval3.value)
-  RunBearTravel()
-
+  if (ColdButtOn.value === "not-allowed") {
+    alert("Блок «Охлаждение» уже включен!")
+  }
+  else {
+    Cold.value = "#21BA45"
+    clearInterval(interval3.value)
+    if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45"
+      & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      BearTravel()
+    }
+  }
 }
 function UpOn() {
-  Up.value = "#21BA45"
-  clearInterval(interval4.value)
-  RunBearTravel()
-
+  if (UDButtOn.value === "not-allowed") {
+    alert("Блок «Извлечение» уже включен!")
+  }
+  else {
+    Up.value = "#21BA45"
+    clearInterval(interval4.value)
+    if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45"
+      & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      BearTravel()
+    }
+  }
 }
 function HotOn() {
-  Hot.value = "#21BA45"
-  clearInterval(interval5.value)
-  RunBearTravel()
-
+  if (HotButtOn.value === "not-allowed") {
+    alert("Блок «Сушка» уже включен!")
+  }
+  else {
+    Hot.value = "#21BA45"
+    clearInterval(interval5.value)
+    if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45"
+      & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      BearTravel()
+    }
+  }
 }
 function BoxOn() {
-  Box.value = "#21BA45"
-  clearInterval(interval6.value)
-  RunBearTravel()
-
+  if (BoxButtOn.value === "not-allowed") {
+    alert("Блок «Упаковка» уже включен!")
+  }
+  else {
+    Box.value = "#21BA45"
+    clearInterval(interval6.value)
+    if ( Smes.value === "#21BA45" & Form.value === "#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45"
+      & Hot.value === "#21BA45" & Box.value === "#21BA45") {
+      BearTravel()
+    }
+  }
 }
 function SmesWarn() {
-  interval.value = setInterval(() => {
-    if (Smes.value === 'black') {
-      Smes.value = 'red'
-    }
-    else {
-      Smes.value = 'black'
+  if (SmesWarnCur.value === "not-allowed") {
+    alert("Блок «Смеситель» уже имеет аварийный статус!")
+  }
+  else {
+    interval.value = setInterval(() => {
+      if (Smes.value === 'black') {
+        Smes.value = 'red'
+      } else {
+        Smes.value = 'black'
 
-    }
-  }, 500)
-  Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearInterval(TimeStopInt.value)
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
-  RPMnumSmes = 0
+      }
+    }, 500)
+    Hot1.value = "rgb(250, 50, 50, 45%)"
+    clearInterval(TimeStopInt.value)
 
+    RPMnumSmes = 0
+  }
 }
 
 function FormWarn() {
-  interval2.value = setInterval(() => {
-    if (Form.value === 'black') {
-      Form.value = 'red'
-    }
-    else {
-      Form.value = 'black'
+  if (FormWarnCur.value === "not-allowed") {
+    alert("Блок «Формовка» уже имеет аварийный статус!")
+  }
+  else {
+    interval2.value = setInterval(() => {
+      if (Form.value === 'black') {
+        Form.value = 'red'
+      } else {
+        Form.value = 'black'
 
-    }
-  }, 500)
-  Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearInterval(TimeStopInt.value)
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
-  RPMnumSmes = 0
+      }
+    }, 500)
+    Hot1.value = "rgb(250, 50, 50, 45%)"
+    clearInterval(TimeStopInt.value)
 
+    RPMnumSmes = 0
+  }
 }
 
 function ColdWarn() {
-  interval3.value = setInterval(() => {
-    if (Cold.value === 'black') {
-      Cold.value = 'red'
-    }
-    else {
-      Cold.value = 'black'
+  if (ColdWarnCur.value === "not-allowed") {
+    alert("Блок «Охлаждение» уже имеет аварийный статус!")
+  }
+  else {
+    interval3.value = setInterval(() => {
+      if (Cold.value === 'black') {
+        Cold.value = 'red'
+      } else {
+        Cold.value = 'black'
 
-    }
-  }, 500)
-  Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearInterval(TimeStopInt.value)
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
-  RPMnumSmes = 0
+      }
+    }, 500)
+    Hot1.value = "rgb(250, 50, 50, 45%)"
+    clearInterval(TimeStopInt.value)
 
+    RPMnumSmes = 0
+  }
 }
 function UpWarn() {
-  interval4.value = setInterval(() => {
-    if (Up.value === 'black') {
-      Up.value = 'red'
-    }
-    else {
-      Up.value = 'black'
+  if (UPWarnCur.value === "not-allowed") {
+    alert("Блок «Извлечение» уже имеет аварийный статус!")
+  }
+  else {
+    interval4.value = setInterval(() => {
+      if (Up.value === 'black') {
+        Up.value = 'red'
+      } else {
+        Up.value = 'black'
 
-    }
-  }, 500)
-  Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearInterval(TimeStopInt.value)
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
-  RPMnumSmes = 0
+      }
+    }, 500)
+    Hot1.value = "rgb(250, 50, 50, 45%)"
+    clearInterval(TimeStopInt.value)
 
+    RPMnumSmes = 0
+  }
 }
 function HotWarn() {
-  interval5.value = setInterval(() => {
-    if (Hot.value === 'black') {
-      Hot.value = 'red'
-    }
-    else {
-      Hot.value = 'black'
+  if (HotWarnCur.value === "not-allowed") {
+    alert("Блок «Сушка» уже имеет аварийный статус!")
+  }
+  else {
+    interval5.value = setInterval(() => {
+      if (Hot.value === 'black') {
+        Hot.value = 'red'
+      } else {
+        Hot.value = 'black'
 
-    }
-  }, 500)
-  Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearInterval(TimeStopInt.value)
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
-  RPMnumSmes = 0
+      }
+    }, 500)
+    Hot1.value = "rgb(250, 50, 50, 45%)"
+    clearInterval(TimeStopInt.value)
 
+    RPMnumSmes = 0
+  }
 }
 function BoxWarn() {
-  interval6.value = setInterval(() => {
-    if (Box.value === 'black') {
-      Box.value = 'red'
-    }
-    else {
-      Box.value = 'black'
+  if (BoxWarnCur.value === "not-allowed") {
+    alert("Блок «Упаковка» уже имеет аварийный статус!")
+  }
+  else {
+    interval6.value = setInterval(() => {
+      if (Box.value === 'black') {
+        Box.value = 'red'
+      } else {
+        Box.value = 'black'
 
-    }
-  }, 500)
-  Hot1.value = "rgb(250, 50, 50, 45%)"
-  clearInterval(TimeStopInt.value)
-  clearTimeout(TimeStop1.value)
-  clearTimeout(TimeStop2.value)
-  clearTimeout(TimeStop3.value)
-  clearTimeout(TimeStop4.value)
-  clearTimeout(TimeStop5.value)
-  RPMnumSmes = 0
+      }
+    }, 500)
+    Hot1.value = "rgb(250, 50, 50, 45%)"
+    clearInterval(TimeStopInt.value)
 
+    RPMnumSmes = 0
+  }
 }
 
 
@@ -1015,7 +918,7 @@ function hot() {
 function SmesRPM() {
   RPMsmesContr.value = setInterval(() => {
     if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
-      RPMnumSmes = 100
+      RPMnumSmes = 72
       RPMnumSmes = RPMnumSmes + 5
       setTimeout(() => {
         RPMnumSmes = RPMnumSmes - 5
@@ -1122,35 +1025,17 @@ function HotCold() {
     ColdTempNum = ColdTempNum + 3
   }, 3800)
 }
-let ColdTempRcontr = ref()
-// function ColdTempR() {
-//   ColdTempRcontr.value = setInterval(() => {
-//     ColdTempNum = ColdTempNum - 1
-//     setTimeout(() => {
-//       ColdTempNum = ColdTempNum - 1
-//     }, 700)
-//     setTimeout(() => {
-//       ColdTempNum = ColdTempNum + 2
-//     }, 1400)
-//     setTimeout(() => {
-//       ColdTempNum = ColdTempNum - 1
-//     }, 2100)
-//     setTimeout(() => {
-//       ColdTempNum = ColdTempNum - 1
-//     }, 2800)
-//     setTimeout(() => {
-//       ColdTempNum = ColdTempNum + 1
-//     }, 3500)
-//     setTimeout(() => {
-//       ColdTempNum = ColdTempNum + 1
-//     }, 4200)
-//   },7000)
-// }
 
 </script>
 
 <style scoped>
 
+
+#container {
+  height: 1000px;
+  background-color: rgb(150, 150, 150, 18%);
+
+}
 
 .Txt {
   text-decoration: Canvas;
@@ -1158,15 +1043,41 @@ let ColdTempRcontr = ref()
 }
 .Con {
   background-color: grey;
-  width: 900px;
+  width: 1260px;
   height: 90px;
   position: absolute;
-  left: 230px;
+  left: 36px;
   top: 330px;
   display: flex;
   font-size: 18px;
   text-align: center;
   color: wheat;
+  box-shadow: 5px 5px 5px black;
+}
+
+#ControlPanelBackGround{
+  width: 1350px;
+  height: 360px;
+  background-color: #121212;
+  position: absolute;
+  z-index: -1;
+  top: 350px;
+
+}
+
+#OwPanel {
+  width: 1300px;
+  height: 170px;
+  background: linear-gradient(
+    180deg,
+    dimgray 42%,
+    #FFFFFF,
+    grey
+  );
+  position: absolute;
+  bottom: 200px;
+  right: 1px;
+  box-shadow: 5px 5px 5px black;
 }
 
 #left{
@@ -1191,15 +1102,15 @@ let ColdTempRcontr = ref()
 #Bear {
   position: relative;
   height: 50px;
-  width: 120px;
-  left: 255px;
+  width: 110px;
+  left: 64px;
   top: 310px;
   z-index: -2;
 
 }
 #bear1 {
   height: 20px;
-  width: 120px;
+  width: 115px;
 }
 
 
@@ -1211,6 +1122,7 @@ let ColdTempRcontr = ref()
   left: 375px;
   top: 425px;
   text-align: center;
+  box-shadow: 5px 5px 5px #121212;
 
 }
 .ControlSmesitel {
@@ -1298,12 +1210,11 @@ font-size: 18px;
 }
 #SmesRPMtar{
   height: 20px;
-  width: 70px;
-  background-color: black;
+  width: 90px;
+  background-color: rgb(50, 50, 50, 100%);
   position: relative;
-  bottom: 20px;
   font-size: 15px;
-
+  left: 15px;
 }
 
 .FormBlock {
@@ -1357,16 +1268,28 @@ font-size: 18px;
   left: 23px;
 }
 #TopS{
-  background-color: grey;
+  background: linear-gradient(
+  135deg,
+  #1D1D1D,
+  #121212,
+  #FFFFFF
+  );
   height: 120px;
   width: 70px;
+  box-shadow: 2px 2px 2px black;
 }
 #middleS {
-  background-color: #1D1D1D;
+  background: linear-gradient(
+    -45deg,
+    #121212,
+    silver,
+    #121212
+  );
   width: 30px;
   height: 90px;
  left: 18%;
   position: relative;
+  box-shadow: 2px 2px 2px black;
 }
 #bottomS{
   position: relative;
@@ -1375,6 +1298,7 @@ font-size: 18px;
   left: 7px;
   border: #1D1D1D 1px solid;
   z-index: -1;
+  box-shadow: 2px 2px 2px black;
 }
 #bottomCRotate {
   width: 60px;
@@ -1389,26 +1313,45 @@ font-size: 18px;
   position: relative;
   bottom: 280px;
   left: 23px;
+
 }
 
 #TopF{
-  background-color: grey;
+  background: linear-gradient(
+    -45deg,
+    #121212,
+    silver,
+    grey
+  );
   height: 120px;
   width: 70px;
+  box-shadow: 2px 2px 2px black;
+
 }
 #middleF1 {
-  background-color: #1D1D1D;
+  background: linear-gradient(
+    -45deg,
+    #121212,
+    grey
+  );
   width: 30px;
   height: 90px;
   left: 18%;
   position: relative;
+  box-shadow: 2px 2px 2px black;
 }
 #bottomF{
   position: relative;
   width: 60px;
   height: 15px;
-  background-color: #1D1D1D;
+  background: linear-gradient(
+    0deg,
+    orangered,
+    #121212,
+  black
+  );
   left: 7px;
+  box-shadow: 2px 2px 2px black;
 }
 
 .ColdTech {
@@ -1420,31 +1363,42 @@ font-size: 18px;
 width: 70px;
   height: 30px;
   background-color: black;
-
   z-index: +30;
-
+  position: relative;
+  top: 30px;
 }
 #TopC{
-  background-color: grey;
+  background: linear-gradient(
+    -45deg,
+    slategrey 1px,
+    #121212,
+    grey
+  );
   height: 120px;
   width: 70px;
+  box-shadow: 2px 2px 2px black;
 }
 #middleC{
-  background-color: #1D1D1D;
+  background: linear-gradient(
+    -45deg,
+    #121212,
+    slategrey,
+   black
+  );
   width: 30px;
   height: 80px;
   left: 18%;
   position: relative;
+  box-shadow: 2px 2px 2px black;
 }
 #bottomC{
   position: relative;
   width: 45px;
   height: 45px;
   left: 14px;
-  //background-image: url("https://avatars.mds.yandex.net/i?id=06d4eb0640f97077a81e81bce482bda907cdbbf0-5194765-images-thumbs&n=13");
   border: #1D1D1D 1px solid;
-  //background-size: auto 100%;
   z-index: -1;
+  box-shadow: 2px 2px 2px black;
 }
 #picTurC{
   width: 31px;
@@ -1461,16 +1415,29 @@ width: 70px;
 }
 
 #TopU{
-  background-color: grey;
+  background: linear-gradient(
+    135deg,
+    #FFFFFF,
+    #1D1D1D,
+    #121212,
+    #FFFFFF
+  );
   height: 120px;
   width: 70px;
+  box-shadow: 2px 2px 2px black;
 }
 #middleU{
-  background-color: #1D1D1D;
+  background: linear-gradient(
+    135deg,
+    #FFFFFF,
+    #1D1D1D,
+    #121212
+  );
   width: 30px;
   height: 90px;
   left: 18%;
   position: relative;
+  box-shadow: 2px 2px 2px black;
 }
 #bottomU{
 border: #1D1D1D solid 1px;
@@ -1481,6 +1448,7 @@ border: #1D1D1D solid 1px;
   background-color: rgb(30, 30, 30, 5%);
   backdrop-filter: blur(10px);
   z-index: -3;
+  box-shadow: 2px 2px 2px black;
 }
 
 .HotTech{
@@ -1489,18 +1457,29 @@ border: #1D1D1D solid 1px;
   left: 23px;
 }
 #TopH{
-  background-color: grey;
+  background: linear-gradient(
+    135deg,
+    saddlebrown,
+    #1D1D1D,
+    #121212,
+    saddlebrown
+  );
   height: 120px;
   width: 70px;
+  box-shadow: 2px 2px 2px black;
 }
 #HotTempBlock {
   width: 70px;
   height: 30px;
-  background-color: black;
+background-color: #121212;
+
+  position: relative;
+  top: 60px;
+
 }
 #HotTime{
   position: relative;
-  top: 9px;
+  top: 39px;
   width: 70px;
   height: 30px;
   background-color: black;
@@ -1508,11 +1487,20 @@ border: #1D1D1D solid 1px;
   color: #C10015;
 }
 #middleH{
-  background-color: #1D1D1D;
+  background: linear-gradient(
+    180deg,
+  saddlebrown,
+    #1D1D1D 75%,
+    #121212,
+    #002137,
+
+    #7442c8
+  );
   width: 30px;
   height: 90px;
   left: 18%;
   position: relative;
+  box-shadow: 2px 2px 2px black;
 }
 #bottomH{
   border: orangered solid 1px;
@@ -1521,6 +1509,7 @@ border: #1D1D1D solid 1px;
   position: relative;
   right: 7px;
   background-color: rgb(250, 50, 50, 45%);
+  box-shadow: 2px 2px 2px black;
 }
 
 .BoxTech {
@@ -1529,16 +1518,28 @@ border: #1D1D1D solid 1px;
   left: 23px;
 }
 #TopB{
-  background-color: grey;
+  background: linear-gradient(
+    135deg,
+    #1D1D1D 43%,
+    darkgray,
+    #121212
+  );
   height: 50px;
   width: 90px;
+  box-shadow: 2px 2px 2px black;
 }
 #middleB{
-  background-color: #1D1D1D;
+  background: linear-gradient(
+    135deg,
+    darkgray,
+    #1D1D1D 43%,
+    #121212
+  );
   width: 30px;
   height: 45px;
   left: 25%;
   position: relative;
+  box-shadow: 2px 2px 2px black;
 }
 #bottomB{
   border: rgb(150,100, 20, 85%) 1px solid;
@@ -1546,6 +1547,7 @@ border: #1D1D1D solid 1px;
   height: 60px;
   position: relative;
   background-color: rgb(350,100, 20, 45%);
+  box-shadow: 2px 2px 2px black;
 }
 
 .water {
@@ -1568,7 +1570,7 @@ border: #1D1D1D solid 1px;
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 0%;
+
   border-radius: 50px;
   background: linear-gradient(
     transparent 0%,
@@ -1616,18 +1618,12 @@ border: #1D1D1D solid 1px;
   background: hsla(342, 100%, 50%, 0.4);
   z-index: 1;
 }
-
 @keyframes water {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
-
 @keyframes spacing {
   0% {	letter-spacing: 0.7em; margin-left: 0.7em; }
   100% { letter-spacing: 1em; margin-left: 1em;}
 }
-
-
 </style>
-
