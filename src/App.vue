@@ -95,9 +95,7 @@
           <div id="HotTempBlock">
             {{HotTemp}}°
           </div>
-
         </div>
-
       </div>
       <div class="BoxBlock" :style="{ 'background-color': Box}"> <p>Упаковка</p>
         <div class="BoxTech">
@@ -107,15 +105,12 @@
           <div  id="bottomB"></div>
         </div>
       </div>
-
     </div>
-
       <div id="ControlPanelBackGround"></div>
-
     <div class="ControlButtonPlate">
-
-
         <div class="ControlSmesitel">
+
+<!--          Кнопки отвечающие за контроль блока "Смеситель"-->
 <button class="ButtonOn"
         :style="{'cursor': SmesButtOn}"
 @click = 'SmesOn'
@@ -128,6 +123,7 @@
       >Смеситель Авария</button>
     </div>
 
+      <!--          Кнопки отвечающие за контроль блока "Формовка"-->
       <div class="FormControl">
         <button class="ButtonOn"
         @click = 'FormOn'
@@ -141,6 +137,7 @@
         >Формовка Авария</button>
       </div>
 
+      <!--          Кнопки отвечающие за контроль блока "Охлаждение"-->
       <div class="ColdControl">
         <button class="ButtonOn"
         @click = 'ColdOn'
@@ -154,6 +151,7 @@
         >Охлаждение Авария</button>
       </div>
 
+      <!--          Кнопки отвечающие за контроль блока "Извлечение"-->
       <div class="UpControl">
         <button class="ButtonOn"
         @click = 'UpOn'
@@ -167,6 +165,7 @@
         >Извлечение Авария</button>
       </div>
 
+      <!--          Кнопки отвечающие за контроль блока "Сушка"-->
       <div class="HotControl">
         <button class="ButtonOn"
         @click = 'HotOn'
@@ -179,6 +178,7 @@
         >Сушка Авария</button>
       </div>
 
+      <!--          Кнопки отвечающие за контроль блока "Упаковка"-->
       <div class="BoxControl">
         <button class="ButtonOn"
         @click = 'BoxOn'
@@ -261,6 +261,8 @@ rotateBottomS()
 SmesRPM()
 let NumberPos = 1
 
+// Функции позиций "Медведя"
+// Смеситель
 function pos1() {
   NumberPos = 1
   bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
@@ -273,6 +275,8 @@ function pos1() {
   SmesRPM()
   HotTime = 0
 }
+
+// Формовка
 function pos2() {
   NumberPos = 2
   bearStylePosLeft.value = 140 + "px"
@@ -283,8 +287,10 @@ function pos2() {
   clearInterval(RPMsmesContr.value)
   RPMnumSmes = 0
   UDForm()
+  console.log(NumberPos)
 }
 
+// Охлаждение
 function pos3() {
   NumberPos = 3
   bearStylePosLeft.value = 280 + "px"
@@ -304,8 +310,10 @@ function pos3() {
   clearInterval(rotateButtScont.value)
   clearInterval(RPMsmesContr.value)
   RPMnumSmes = 0
+  console.log(NumberPos)
 }
 
+// Извлечение
 function pos4() {
   NumberPos = 4
   bearStyleStyleHeight.value = 25 + "px"
@@ -314,9 +322,11 @@ function pos4() {
   bearStylePosTop.value = -10 + "px"
   clearInterval(rotateButtCocont.value)
   HotCold()
+  console.log(NumberPos)
   bearStyleSrc.value = "https://media.istockphoto.com/id/1302390177/ru/%D0%B2%D0%B5%D0%BA%D1%82%D0%BE%D1%80%D0%BD%D0%B0%D1%8F/%D0%BE%D1%80%D0%B0%D0%BD%D0%B6%D0%B5%D0%B2%D1%8B%D0%B9-%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B8%D0%B9-%D0%BC%D0%B5%D0%B4%D0%B2%D0%B5%D0%B4%D1%8C-%D0%B6%D0%B5%D0%BB%D0%B5-%D1%81%D0%BB%D0%B0%D0%B4%D0%BA%D0%B8%D0%B5-%D0%BA%D0%BE%D0%BD%D1%84%D0%B5%D1%82%D1%8B-%D1%81-%D1%83%D0%B4%D0%B8%D0%B2%D0%B8%D1%82%D0%B5%D0%BB%D1%8C%D0%BD%D1%8B%D0%BC-%D0%B2%D0%BA%D1%83%D1%81%D0%BE%D0%BC-%D0%BF%D0%BB%D0%BE%D1%81%D0%BA%D0%B8%D0%B9-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B4%D0%B8%D0%B7%D0%B0%D0%B9%D0%BD.jpg?s=612x612&w=0&k=20&c=Kd9x56zTT8NoEQPS4txp4XFVdIca29zq8MhdvuKUw38="
-
 }
+
+// Сушка
 function pos5() {
   NumberPos = 5
   bearStyleStyleHeight.value = 25 + "px"
@@ -326,8 +336,10 @@ function pos5() {
   bearRotate.value = "90"
   hot()
   HotTimeAndTempR()
-
+  console.log(NumberPos)
 }
+
+// Упаковка
 function pos6() {
   NumberPos = 6
   bearStyleStyleHeight.value = 45 + "px"
@@ -339,9 +351,10 @@ function pos6() {
   clearInterval(HotContr.value)
   Hot1.value = "rgb(250, 50, 50, 45%)"
   HotTime = 0
+  console.log(NumberPos)
 }
 
-
+// Функция отвечающая за истечение таймера и повышения температуры блока "Сушка"
 function HotTimeAndTempR() {
   HotTime = HotTime +6
   setTimeout(() => {
@@ -412,6 +425,7 @@ function HotTimeAndTempR() {
     HotTemp = HotTemp +1
   },1500)
 }
+// Функция отвечающая за понижение температуры блока "Сушка"
 function HotTempReverse() {
   setTimeout(() => {
     HotTemp = HotTemp -1
@@ -460,6 +474,8 @@ function HotTempReverse() {
   },1500)
 }
 bearStyleSrc.value = 'https://media.teradom.ru/images/39/198.jpg'
+
+// Функция отвечающая за перемещение "Медведя" по канвееру
 function BearTravel() {
   console.log(NumberPos)
   TimeStopInt.value = setInterval(() => {
@@ -499,7 +515,7 @@ function BearTravel() {
         pos1()
       }, 3000)
     }
-},6000)
+},7000)
 
 }
 
@@ -512,6 +528,7 @@ let UDButtOn = ref()
 let HotButtOn = ref()
 let BoxButtOn = ref()
 
+// Функция отвечающая за изменение вида курсора при повторном наведении на уже действующую кнопку
 function ActionIfButt() {
   setInterval(() => {
     if (Smes.value === "#21BA45") {
@@ -586,7 +603,7 @@ function ActionIfButt() {
 }
 ActionIfButt()
 
-
+// Функции приводящие в работу блок "Формовка"
 function UDForm() {
   UDformOwContr.value = setInterval(() => {
     if (numberTime.value === 0) {
@@ -624,7 +641,7 @@ function UDForm() {
   // console.log(3)
 }
 
-
+//  Функции обеспечивающие запланированную остановку того или иного блока по нажатию соответствующей кнопки
 function SmesStop() {
   Smes.value = 'orangered'
   clearInterval(interval.value)
@@ -688,6 +705,7 @@ function BoxStop() {
 
 }
 
+//  Функции обеспечивающие запуск того или иного блока по нажатию соответствующей кнопки
 function SmesOn() {
   if (SmesButtOn.value === "not-allowed") {
     alert("Блок «Смеситель» уже включен!")
@@ -767,6 +785,8 @@ function BoxOn() {
     }
   }
 }
+
+//  Функции устанавливающие аварийный статус того или иного блока по нажатию соответствующей кнопки
 function SmesWarn() {
   if (SmesWarnCur.value === "not-allowed") {
     alert("Блок «Смеситель» уже имеет аварийный статус!")
@@ -884,7 +904,7 @@ function BoxWarn() {
   }
 }
 
-
+// Функция вращения лопастей смесителя
 function rotateBottomS() {
   rotateButtScont.value = setInterval(() => {
     if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45")
@@ -892,6 +912,7 @@ function rotateBottomS() {
   }, 25)
 }
 
+// Функция вращения лопастей охлаждающего блока
 let rotateButtCocont = ref()
 function rotateBottomC() {
   rotateButtCocont.value = setInterval(() => {
@@ -900,6 +921,7 @@ function rotateBottomC() {
   }, 25)
 }
 
+// Функция визуализации работы блока нагрева
 let HotContr = ref()
 function hot() {
   HotContr.value = intervalhot.value = setInterval(() => {
@@ -915,6 +937,7 @@ function hot() {
 
 }
 
+// Функция отвечающая за "колебания" значения RPM смесителя
 function SmesRPM() {
   RPMsmesContr.value = setInterval(() => {
     if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45") {
@@ -936,9 +959,13 @@ function SmesRPM() {
         RPMnumSmes = RPMnumSmes - 5
       }, 200)
     }
+    else {
+      RPMnumSmes = 0
+    }
 },2500)
 }
 
+// Функция отвечающая за понижение температуры блока "Охлаждение"
 ColdTempNum = 21
 function ColdHot() {
     setTimeout(() => {
@@ -983,6 +1010,7 @@ function ColdHot() {
     }, 2500)
 }
 
+// Функция отвечающая за повышение температуры блока "Охлаждение"
 function HotCold() {
   setTimeout(() => {
     ColdTempNum = ColdTempNum + 1
@@ -1042,7 +1070,12 @@ function HotCold() {
   cursor: context-menu;
 }
 .Con {
-  background-color: grey;
+  background: linear-gradient(
+    175deg,
+    dimgray 42%,
+    grey,
+    dimgray
+  );
   width: 1260px;
   height: 90px;
   position: absolute;
