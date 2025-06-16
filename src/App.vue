@@ -909,7 +909,11 @@ function rotateBottomS() {
   rotateButtScont.value = setInterval(() => {
     if( Smes.value === "#21BA45" & Form.value ==="#21BA45" & Cold.value === "#21BA45" & Up.value === "#21BA45" & Hot.value === "#21BA45" & Box.value === "#21BA45")
     bottomSRotate.value += 5
+    else {
+      bottomSRotate.value =0
+    }
   }, 25)
+
 }
 
 // Функция вращения лопастей охлаждающего блока
